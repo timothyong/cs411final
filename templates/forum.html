@@ -1,4 +1,3 @@
-hello people
 
 {% if username %}
 <a href="{{ url_for('settings') }}">{{ username }}</a>
@@ -7,5 +6,16 @@ hello people
 <a href="{{ url_for('login', redirectTo='index') }}">Login</a>
 <a href="{{ url_for('register', redirectTo='index') }}">Register</a>
 {% endif %}
+<br>
 
-<a href="{{ url_for('forum') }}">Forum</a>
+{% if username %}
+<a href="{{ url_for('postquestion') }}">Ask a Question</a>
+{% endif %}
+<br>
+ 
+<h1>Questions</h1>
+<ul>
+{% for x in questions %}
+<li><a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a></li>
+{% endfor %}
+</ul>

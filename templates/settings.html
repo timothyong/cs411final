@@ -1,0 +1,18 @@
+<a href="{{ url_for('settings') }}">{{ username }}</a>
+<a href="{{ url_for('logout') }}">Logout</a>
+
+<br>
+
+Name: {{ userinfo[3] }}<br>
+Gender: {{ userinfo[0] }}<br>
+Username: {{ userinfo[2] }}<br>
+Rank: {{ userinfo[1] }}<br>
+
+
+{{ retval }} 
+<h3>Change Password</h3>
+<form method="POST">
+  Current Password: <input type="password" name="password"><br>
+  New Password: <input type="password" name="newpassword"><br>  
+  <button type="submit" value="submit" name="button">Change</button>
+</form>

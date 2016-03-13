@@ -1,0 +1,35 @@
+{% if username %}
+<a href="{{ url_for('settings') }}">{{ username }}</a>
+<a href="{{ url_for('logout') }}">Logout</a>
+{% else %}
+<a href="{{ url_for('login', redirectTo='index') }}">Login</a>
+<a href="{{ url_for('register', redirectTo='index') }}">Register</a>
+{% endif %}
+<br>
+
+<h1>{{ question[0] }}</h1><h6> (category: {{ question[4] }})</h6>
+posted on: {{ question[1] }} by: {{ question[5] }}
+<br>
+{# question text #}
+{{ question[2] }}
+
+<hr>
+{% for x in answers %}
+<div>
+  upvotes: {{ x[0] }}
+  <br>
+  posted on: {{ x[1] }} by: {{ x[5] }}
+  <br>
+  {# answer text #}
+  {{ x[3] }}
+</div>
+<hr>
+{% endfor %}
+
+
+{% if username %}
+<form method="POST">
+  <textarea name="answer" rows="4" cols="50">  </textarea>
+  <button type="submit" value="submit" name="button">Answer</button>  
+</form>
+{% endif %}

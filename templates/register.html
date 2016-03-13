@@ -1,0 +1,14 @@
+{% if error %}
+<font color=red>{{ error }}</font>
+{% endif %}
+<form method="POST">
+  Name:<br>
+  <input type="text" name="name"><br>
+  <input type="radio" name="gender" value="M" checked> Male<br>
+  <input type="radio" name="gender" value="F"> Female<br>
+  Username:<br>
+  <input type="text" name="username"><br>
+  Password:<br>
+  <input type="password" name="password"><br>
+  <button type="submit" value="submit" name="button">Login</button>
+</form>

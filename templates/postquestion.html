@@ -1,0 +1,14 @@
+<a href="{{ url_for('settings') }}">{{ username }}</a>
+<a href="{{ url_for('logout') }}">Logout</a>
+
+<form method="POST">
+  Question Title:<br>
+  <input type="text" name="questionTitle"><br>
+  Category:<br>
+  <input type="radio" name="category" value="#YOLO" checked> #YOLO<br>
+  <input type="radio" name="category" value="#LMFAO"> #LMFAO<br>
+  <input type="radio" name="category" value="#WUT"> #WUT<br>
+  Question: <br>
+  <textarea name="questionText" rows="4" cols="50"></textarea>
+  <button type="submit" value="submit" name="button">Post</button>
+</form>

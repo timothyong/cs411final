@@ -1,10 +1,10 @@
 import sqlite3
 
 conn = sqlite3.connect('clarity.db')
-c = conn.cursor
+c = conn.cursor()
 
 def getUser(username):
-    c.execute('SELECT gender, rank, username, name FROM users WHERE username=?', username)
+    c.execute('SELECT gender, rank, username, name FROM users WHERE username=:username', {"username":username})
     return c.fetchone()
 
 def getQuestionById(qid):
@@ -12,7 +12,7 @@ def getQuestionById(qid):
     return c.fetchone()
 
 def getQuestionsByCategory(category):
-    c.execute('SELECT * FROM questions WHERE category=? ORDER BY date DESC', category)
+    c.execute('SELECT * FROM questions WHERE category=? ORDER BY qdate DESC', category)
     return c.fetchall()
 
 def getQuestionsByUser(username, order):
@@ -21,15 +21,15 @@ def getQuestionsByUser(username, order):
     return c.fetchall()
 
 def getAllQuestions():
-    c.execute('SELECT * FROM questions ORDER BY date DESC')
+    c.execute('SELECT * FROM questions ORDER BY qdate DESC')
     return c.fetchall()
 
 def getAnswersByQuestion(qid):
-    c.execute('SELECT * FROM questions WHERE qid=? ORDER BY upvotes DESC', qid)
+    c.execute('SELECT * FROM answers WHERE qid=? ORDER BY upvotes DESC', qid)
     return c.fetchall()
 
 def getAnswersByUser(username, order):
-    c.execute('SELECT * FROM questions WHERE username=:username ORDER BY :order DESC', 
+    c.execute('SELECT * FROM answers WHERE username=:username ORDER BY :order DESC', 
               {"username":username, "order":order})
     return c.fetchall()
 
@@ -59,7 +59,7 @@ def login(username, password):
     x = c.fetchone()
     if x == None:
         return "Username not found"
-    elif x['password'] != password:
+    elif x[3] != password:
         return "Invalid username/password combination"
     else:
         return "True"
@@ -79,7 +79,7 @@ def changePassword(username, password, newpassword):
     c.execute('SELECT * FROM users WHERE username=:username',
               {"username":username})
     x = c.fetchone()
-    if x['password'] != password:
+    if x[3] != password:
         return "Incorrect password entered"
     else:
         c.execute('UPDATE users SET password=:newpassword WHERE username=:username',
