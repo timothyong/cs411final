@@ -12,7 +12,7 @@ def getQuestionById(qid):
     return c.fetchone()
 
 def getQuestionsByCategory(category):
-    c.execute('SELECT * FROM questions WHERE category=? ORDER BY qdate DESC', category)
+    c.execute('SELECT * FROM questions WHERE category=:category ORDER BY qdate DESC', {"category":category})
     return c.fetchall()
 
 def getQuestionsByUser(username, order):
@@ -28,6 +28,10 @@ def getAnswersByQuestion(qid):
     c.execute('SELECT * FROM answers WHERE qid=? ORDER BY upvotes DESC', qid)
     return c.fetchall()
 
+def getAnswerById(aid):
+    c.execute('SELECT * FROM answers WHERE aid=:aid', {"aid":aid})
+    return c.fetchone()
+
 def getAnswersByUser(username, order):
     c.execute('SELECT * FROM answers WHERE username=:username ORDER BY :order DESC', 
               {"username":username, "order":order})
@@ -40,10 +44,21 @@ def insertQuestion(title, qdate, qtext, category, username):
     conn.commit()
     return True
 
+def deleteQuestion(qid):
+    c.execute('DELETE FROM questions WHERE qid=:qid', {"qid":qid})
+    c.execute('DELETE FROM answers WHERE qid=:qid', {"qid":qid})
+    conn.commit()
+    return True
+
 def insertAnswer(adate, atext, qid, username):
     c.execute('''INSERT INTO answers (upvotes, adate, atext, qid, username)
                  VALUES (0, :adate, :atext, :qid, :username)''',
               {"adate":adate, "atext":atext, "qid":qid, "username":username})
+    conn.commit()
+    return True
+
+def deleteAnswer(aid):
+    c.execute('DELETE FROM answers WHERE aid=:aid', {"aid":aid})
     conn.commit()
     return True
 

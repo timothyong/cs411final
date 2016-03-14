@@ -12,10 +12,27 @@
 <a href="{{ url_for('postquestion') }}">Ask a Question</a>
 {% endif %}
 <br>
- 
-<h1>Questions</h1>
+<h1>Sort by category</h1>
 <ul>
-{% for x in questions %}
-<li><a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a></li>
-{% endfor %}
+  <li><a href='{{ url_for('forum') }}'>All Questions</a></li>
+  <li><a href='{{ url_for('forum', category="#YOLO") }}'>#YOLO</a></li>
+  <li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>
+  <li><a href='{{ url_for('forum', category="#WUT") }}'>#WUT</a></li>
+ </ul>
+{% if category %}
+<h1>{{ category }} Questions</h1>
+{% else %}
+<h1>All Questions</h1>
+{% endif %}
+<ul>
+  {% for x in questions %}
+  <li>
+    <a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a>&nbsp;&nbsp;&nbsp;
+    {% if username %}
+    {% if username == x[5] %}
+    <a href='{{ url_for('deletequestion', qid=x[3]) }}'> Delete </a>
+    {% endif %}
+    {% endif %}
+  </li>
+  {% endfor %}
 </ul>

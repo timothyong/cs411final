@@ -9,10 +9,18 @@
 
 <h1>{{ question[0] }}</h1><h6> (category: {{ question[4] }})</h6>
 posted on: {{ question[1] }} by: {{ question[5] }}
+
 <br>
 {# question text #}
 {{ question[2] }}
+<br>
+{% if username %}
+{% if username == question[5] %}
+<a href='{{ url_for("deletequestion", qid=question[3]) }}'> Delete </a>
+{% endif %}
+{% endif %}
 
+<hr>
 <hr>
 {% for x in answers %}
 <div>
@@ -22,6 +30,13 @@ posted on: {{ question[1] }} by: {{ question[5] }}
   <br>
   {# answer text #}
   {{ x[3] }}
+  <br>
+  {% if username %}
+  {% if username == x[5] %}
+  <a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'> Delete </a>
+  {% endif %}
+  {% endif %}
+  
 </div>
 <hr>
 {% endfor %}

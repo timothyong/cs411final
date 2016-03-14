@@ -89,9 +89,9 @@ def forum(category = None):
     else:
         questions = dbutils.getQuestionsByCategory(category)
         if 'username' in session:
-            return render_template("forum.html", username=session['username'], questions=questions)
+            return render_template("forum.html", username=session['username'], questions=questions, category=category)
         else:
-            return render_template("forum.html", questions=questions)
+            return render_template("forum.html", questions=questions, category=category)
 
 @app.route("/postquestion", methods=["GET", "POST"])
 def postquestion():
@@ -106,6 +106,30 @@ def postquestion():
             category = request.form['category']
             dbutils.insertQuestion(questionTitle, calendar.timegm(time.gmtime()), questionText, category, session['username'])
             return redirect(url_for("forum"))
+
+@app.route("/deletequestion/<qid>")
+def deletequestion(qid = None):
+    if qid is None:
+        return redirect(url_for("error"))
+    else:
+        question = dbutils.getQuestionById(str(qid))
+        if session['username'] == question[5]:
+            dbutils.deleteQuestion(str(qid))
+            return redirect(url_for("forum"))
+        else:
+            return redirect(url_for("error"))
+
+@app.route("/deleteanswer/<aid>/<qid>")
+def deleteanswer(aid = None, qid = None):
+    if qid is None or aid is None:
+        return redirect(url_for("error"))
+    else:
+        answer = dbutils.getAnswerById(str(aid))
+        if session['username'] == answer[5]:
+            dbutils.deleteAnswer(str(aid))
+            return redirect(url_for("question", qid=qid))
+        else:
+            return redirect(url_for("error"))
 
 @app.route("/question/<qid>", methods=["GET", "POST"])
 def question(qid = None):
