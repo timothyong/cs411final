@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('clarity.db')
+conn = sqlite3.connect('clarity.db', check_same_thread=False)
 c = conn.cursor()
 
 def getUser(username):
