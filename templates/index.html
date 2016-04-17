@@ -1,11 +1,25 @@
-hello people
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
 
-{% if username %}
-<a href="{{ url_for('settings') }}">{{ username }}</a>
-<a href="{{ url_for('logout') }}">Logout</a>
-{% else %}
-<a href="{{ url_for('login', redirectTo='index') }}">Login</a>
-<a href="{{ url_for('register', redirectTo='index') }}">Register</a>
-{% endif %}
+<body>
+  <div class="poopoo" >
 
-<a href="{{ url_for('forum') }}">Forum</a>
+    <div class="modal">
+      <span class="logo">clarity</span>
+      <div class="links-container">
+        {% if username %}
+        <a href="{{ url_for('settings') }}">{{ username }}</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login', redirectTo='index') }}">Login</a>
+        <a href="{{ url_for('register', redirectTo='index') }}">Register</a>
+        {% endif %}
+
+        <a href="{{ url_for('forum') }}">Forum</a>
+      </div>
+
+    </div>
+
+  </div>
+</body>
