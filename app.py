@@ -46,7 +46,9 @@ def register(redirectTo = None):
         if request.method == "GET":
             return render_template("register.html")
         else:
-            gender = request.form['gender']
+            # default gender to 'M' cus who cares about gender.
+            gender = 'M'
+            #gender = request.form['gender']
             #assert (gender in ["M", "F"])
             username = request.form['username'].encode('ascii', 'ignore')
             password = request.form['password'].encode('ascii', 'ignore')
