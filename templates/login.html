@@ -3,18 +3,21 @@
 </head>
 
 <body>
-  <div class="poopoo">
+  <div class="modal-container">
     <div class="modal">
-      <span class="logo">clarity</span>
+      <span class="logo">
+        <a href="{{ url_for('index', redirectTo='index') }}">clarity</a>
+      </span>
       {% if error %}
       <font color=red>{{ error }}</font>
       {% endif %}
       <div class="links-container" id="login-form">
-        <form method="POST" style="margin-bottom: 0px;">
+        <form method="POST">
           <input type="text" name="username" placeholder="Username">
           <input type="password" name="password" placeholder="Password">
           <button type="submit" value="submit" name="button">Login</button>
         </form>
+        <span class="newUser">New user? <a href="{{ url_for('register', redirectTo='index') }}">Register</a> now!</span>
       </div>
     </div>
 
