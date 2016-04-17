@@ -1,12 +1,25 @@
-{% if error %}
-<font color=red>{{ error }}</font>
-{% endif %}
-<div class="container" style="background: red;">
-  <form method="POST">
-    Username:<br>
-    <input type="text" name="username"><br>
-    Password:<br>
-    <input type="password" name="password"><br>
-    <button type="submit" value="submit" name="button">Login</button>
-  </form>
-</div>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+  <div class="poopoo">
+    <div class="modal">
+      <span class="logo">clarity</span>
+      {% if error %}
+      <font color=red>{{ error }}</font>
+      {% endif %}
+      <div class="links-container" id="login-form">
+        <form method="POST" style="margin-bottom: 0px;">
+          <input type="text" name="username" placeholder="Username">
+          <input type="password" name="password" placeholder="Password">
+          <button type="submit" value="submit" name="button">Login</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+<script src="../static/js/PLACEHOLDER.js"></script>

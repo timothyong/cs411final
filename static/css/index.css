@@ -31,6 +31,7 @@ body {
   border-radius: 3px;
   text-align: center;
   padding: 20px;
+  padding-bottom: 30px;
   border: 1px solid rgba(125, 136, 255, 0.5);
 }
 
@@ -40,13 +41,90 @@ body {
   color: #7d88ff;
 }
 
+/* temp */
+.links-container {
+
+}
+
 .links-container a {
   color: white;
   font-family: 'Varela Round', sans-serif;
   text-decoration: none;
-  display: block;
+  display: inline-block;
+  width: 245px;
   background: rgba(125, 136, 255, 0.75);
   border-radius: 3px;
   padding: 10px;
-  margin-top: 15px;
+  margin-top: 10px;
+  border: 1px solid rgba(125, 136, 255, 0.5);
+}
+
+/* login form for login.html */
+#login-form {
+
+  margin-bottom: 0px;
+}
+
+#login-form input {
+  box-sizing: border-box;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 3px;
+  font-size: 1em;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  box-sizing:         border-box;
+
+  border: 1px solid rgba(125, 136, 255, 0.5);
+  margin-top: 10px;
+  padding: 10px;
+  width: 265px;
+  color: rgba(125, 136, 255, 0.5);
+
+}
+
+#login-form input::-webkit-input-placeholder {
+  color: rgba(125, 136, 255, 0.5);
+}
+
+#login-form input:-moz-placeholder { /* Firefox 18- */
+  color: rgba(125, 136, 255, 0.5);
+}
+
+#login-form input::-moz-placeholder {  /* Firefox 19+ */
+  color: rgba(125, 136, 255, 0.5);
+}
+
+#login-form input:-ms-input-placeholder {
+  color: rgba(125, 136, 255, 0.5);
+}
+
+#login-form input:focus {
+  border: 1px solid rgba(125, 136, 255, 1);
+  outline: none;
+  color: rgb(125, 136, 255);
+}
+
+#login-form button {
+  color: white;
+  font-family: 'Varela Round', sans-serif;
+  width: 265px;
+  background: rgba(125, 136, 255, 0.75);
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid rgba(125, 136, 255, 0.5);
+  margin-top: 10px;
+  outline: none;
+}
+
+#login-form button:hover,
+.links-container a:hover {
+  cursor: pointer;
+  background: rgba(125, 136, 255, 0.65);
+}
+
+#login-form button:active,
+.links-container a:active {
+  background: rgba(125, 136, 255, 0.85);
 }
