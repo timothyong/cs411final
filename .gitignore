@@ -63,4 +63,11 @@ target/
 
 #venv
 venv/
-*.db
+
+#temp shit
+test.py
+
+#fuk the .db
+clarity.db
+
+
