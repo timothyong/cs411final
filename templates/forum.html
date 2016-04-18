@@ -2,9 +2,9 @@
 {% if username %}
 {% include 'header.html' %}
 {% else %}
-<a href="{{ url_for('login', redirectTo='index') }}">Login</a>
+<a href="{{ url_for('login', redirectTo='forum') }}">Login</a>
 <a href="{{ url_for('forum') }}">Forum</a>
-<a href="{{ url_for('register', redirectTo='index') }}">Register</a>
+<a href="{{ url_for('register', redirectTo='forum') }}">Register</a>
 {% endif %}
 <br>
 

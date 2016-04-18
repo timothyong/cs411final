@@ -7,7 +7,7 @@
   <div class="navbar-left">
     <div class="navbar-logo">
       <span class="logo">
-        <a href="{{ url_for('forum', redirectTo='index') }}">SEXYLOGO</a>
+        <a href="{{ url_for('forum', redirectTo='forum') }}">SEXYLOGO</a>
       </span>
     </div> <!-- navbar-logo -->
   </div> <!-- navbar-left -->
@@ -18,8 +18,8 @@
       <span id="hello" >Hello, <a id="username" href="{{ url_for('settings') }}">{{ username }}</a></span>
       <a id="logout" href="{{ url_for('logout') }}">LOG OUT</a>
       {% else %}
-      <a id="login" href="{{ url_for('login', redirectTo='index') }}">LOG IN</a>
-      <a id="register" href="{{ url_for('register', redirectTo='index') }}">SIGN UP</a>
+      <a id="login" href="{{ url_for('login', redirectTo='forum') }}">LOG IN</a>
+      <a id="register" href="{{ url_for('register', redirectTo='forum') }}">SIGN UP</a>
       {% endif %}
       <!-- <a href="{{ url_for('forum') }}">Forum</a> -->
 
