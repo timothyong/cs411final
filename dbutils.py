@@ -7,6 +7,15 @@ def getUser(username):
     c.execute('SELECT gender, rank, username, name FROM users WHERE username=:username', {"username":username})
     return c.fetchone()
 
+def getVotes(username):
+    c.execute('SELECT voted FROM users WHERE username=:username', {"username":username})
+    return c.fetchone()
+
+def updateVoted(username, voted):
+    c.execute('UPDATE users SET voted=:voted WHERE username=:user', {"voted":voted, "username":username})
+    conn.commit()
+    return True
+
 def getQuestionById(qid):
     c.execute('SELECT * FROM questions WHERE qid=?', qid)
     return c.fetchone()
@@ -62,9 +71,23 @@ def deleteAnswer(aid):
     conn.commit()
     return True
 
+def updateAnswer(aid, votes):
+    c.execute('UPDATE answers SET upvotes=:votes WHERE aid=:aid', {"votes":votes, "aid":aid})
+    conn.commit()
+    return True
+
+def getUserRank(user):
+    c.execute('SELECT rank FROM users WHERE username=:username', {"username":user})
+    return c.fetchone()[0]
+
+def updateUserRank(user, rank):
+    c.execute('UPDATE users SET rank=:rank WHERE username=:username', {"rank":rank, "username":user})
+    conn.commit()
+    return True
+
 def insertUser(gender, rank, username, password, name):
-    c.execute('''INSERT INTO users VALUES (:gender, :rank, :username, :password, :name)''',
-              {"gender":gender, "rank":rank, "username":username, "password":password, "name":name})
+    c.execute('''INSERT INTO users VALUES (:gender, :rank, :username, :password, :name, :voted)''',
+              {"gender":gender, "rank":rank, "username":username, "password":password, "name":name, "voted":""})
     conn.commit()
     return True
 
@@ -102,28 +125,11 @@ def changePassword(username, password, newpassword):
         conn.commit()
         return "Password successfully changed"
 
+
+'''
 def isUserAdmin(username):
     c.execute('SELECT * FROM admins WHERE username=:username',
               {"username":username})
     x = c.fetchone()
-    if x == None:
-        return False
-    else:
-        return True
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
+    return True
+'''

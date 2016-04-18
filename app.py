@@ -6,16 +6,25 @@ app = Flask(__name__)
 app.secret_key = "el em eff ay oh"
 
 @app.route("/")
-def index():
-    if 'username' in session:
-        return render_template("index.html", username = session['username'])
+@app.route("/<category>")
+def forum(category = None):
+    if category is None:
+        allQuestions = dbutils.getAllQuestions()
+        if 'username' in session:
+            return render_template("forum.html", username=session['username'], questions=allQuestions)
+        else:
+            return render_template("forum.html", questions=allQuestions)
     else:
-        return render_template("index.html")
+        questions = dbutils.getQuestionsByCategory(category)
+        if 'username' in session:
+            return render_template("forum.html", username=session['username'], questions=questions, category=category)
+        else:
+            return render_template("forum.html", questions=questions, category=category)
 
 @app.route("/login", methods=["GET", "POST"])
 def login(redirectTo = None):
     if 'username' in session:
-        return redirect(url_for("index"))
+        return redirect(url_for("forum"))
     else:
         if request.method == "GET":
             return render_template("login.html")
@@ -27,7 +36,7 @@ def login(redirectTo = None):
             if retval == 'True':
                 session['username'] = username
                 if redirectTo is None:
-                    return redirect(url_for("index"))
+                    return redirect(url_for("forum"))
                 else:
                     return redirect(url_for(redirectTo))
             else:
@@ -36,12 +45,12 @@ def login(redirectTo = None):
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for("index"))
+    return redirect(url_for("forum"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register(redirectTo = None):
     if 'username' in session:
-        return redirect(url_for("index"))
+        return redirect(url_for("forum"))
     else:
         if request.method == "GET":
             return render_template("register.html")
@@ -58,7 +67,7 @@ def register(redirectTo = None):
             if retval == "True":
                 session['username'] = username
                 if redirectTo is None:
-                    return redirect(url_for("index"))
+                    return redirect(url_for("forum"))
                 else:
                     return redirect(url_for(redirectTo))
             else:
@@ -79,6 +88,8 @@ def settings():
             retval = dbutils.changePassword(session['username'], password, newpassword)
             return render_template("settings.html", userinfo=userinfo, retval=retval, username=session['username'])
 
+
+'''
 @app.route("/forum")
 @app.route("/forum/<category>")
 def forum(category = None):
@@ -97,6 +108,8 @@ def forum(category = None):
             return render_template("forum.html", username=session['username'], questions=questions, category=category, isAdmin=isAdmin)
         else:
             return render_template("forum.html", questions=questions, category=category)
+'''
+
 
 @app.route("/postquestion", methods=["GET", "POST"])
 def postquestion():
@@ -173,12 +186,40 @@ def question(qid = None):
             dbutils.insertAnswer(calendar.timegm(time.gmtime()), answerText, qid, session['username'])
             return redirect(url_for("question", qid=qid))
 
+@app.route("/vote/<aid>/<updown>")
+def vote(aid = None, updown = None):
+    if aid is None or updown is None or 'username' not in session:
+        return redirect(url_for("error"))
+    else:
+        user = session['username']
+        answer = dbutils.getAnswerById(aid)
+        voted = dbutils.getVotes(user)[0].split()
+        question = answer[4]
+        userUp = answer[5]
+        rank = dbutils.getRank(userUp)
+        upvotes = answer[0]
+        if updown == "up":
+            upvotes += 1
+            rank += 2
+        else:
+            upvotes -= 1
+            rank -= 1
+        if aid in voted:
+            return redirect(url_for("question", qid=question))
+        else:
+            dbutils.updateAnswer(answer[2], upvotes)
+            dbutils.updateUserRank(userUp, rank)
+            voted.append(aid)
+            putback = " ".join(voted)
+            dbutils.updateVoted(user, putback)
+            return redirect(url_for("question", qid=question))
+
 @app.route("/user/<username>")
 def user(username):
     if username == None:
         return redirect(url_for("error"))
     userinfo = dbutils.getUser(username)
-    recentAnswers = dbutils.getAnswersByUser(username, "adate")[0:5]
+    recentAnswers = dbutils.getAnswerOBsByUser(username, "adate")[0:5]
     topAnswers = dbutils.getAnswersByUser(username, "upvotes")[0:5]
     recentQuestions = dbutils.getQuestionsByUser(username, "qdate")[0:5]
     if 'username' in session:
