@@ -15,7 +15,7 @@ posted on: {{ question[1] }} by: {{ question[5] }}
 {{ question[2] }}
 <br>
 {% if username %}
-{% if username == question[5] %}
+{% if username == question[5] or isAdmin %}
 <a href='{{ url_for("deletequestion", qid=question[3]) }}'> Delete </a>
 {% endif %}
 {% endif %}
@@ -32,7 +32,7 @@ posted on: {{ question[1] }} by: {{ question[5] }}
   {{ x[3] }}
   <br>
   {% if username %}
-  {% if username == x[5] %}
+  {% if username == x[5] or isAdmin %}
   <a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'> Delete </a>
   {% endif %}
   {% endif %}
