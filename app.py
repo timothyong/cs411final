@@ -118,6 +118,9 @@ def deletequestion(qid = None):
         if session['username'] == question[5]:
             dbutils.deleteQuestion(str(qid))
             return redirect(url_for("forum"))
+        elif dbutils.isUserAdmin(session['username']):
+            dbutils.deleteQuestion(str(qid))
+            return redirect(url_for("forum"))
         else:
             return redirect(url_for("error"))
 
@@ -128,6 +131,9 @@ def deleteanswer(aid = None, qid = None):
     else:
         answer = dbutils.getAnswerById(str(aid))
         if session['username'] == answer[5]:
+            dbutils.deleteAnswer(str(aid))
+            return redirect(url_for("question", qid=qid))
+        elif dbutils.isUserAdmin(session['username']):
             dbutils.deleteAnswer(str(aid))
             return redirect(url_for("question", qid=qid))
         else:

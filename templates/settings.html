@@ -1,18 +1,33 @@
-<a href="{{ url_for('settings') }}">{{ username }}</a>
-<a href="{{ url_for('logout') }}">Logout</a>
+{% include 'header.html' %}
 
 <br>
-
+<div class="settings-info">
 Name: {{ userinfo[3] }}<br>
 Gender: {{ userinfo[0] }}<br>
 Username: {{ userinfo[2] }}<br>
 Rank: {{ userinfo[1] }}<br>
-
-
+</div>
+<!--
 {{ retval }} 
-<h3>Change Password</h3>
+
+
 <form method="POST">
   Current Password: <input type="password" name="password"><br>
   New Password: <input type="password" name="newpassword"><br>  
   <button type="submit" value="submit" name="button">Change</button>
 </form>
+
+-->
+
+
+<h3>Change Password</h3>
+ <div class="links-container" id="change-password-form">
+	<form method="POST">
+		<input type="password" name="password" placeholder="Current Password"><br>
+		<input type="password" name="newpassword" placeholder="New Password"><br>
+		<button type="submit" value="submit" name="button">Change</button>
+	</form>
+	{% if retval %}
+		<font color=red> {{ retval }} </font>
+	{% endif %}
+</div>

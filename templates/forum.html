@@ -1,9 +1,9 @@
 
 {% if username %}
-<a href="{{ url_for('settings') }}">{{ username }}</a>
-<a href="{{ url_for('logout') }}">Logout</a>
+{% include 'header.html' %}
 {% else %}
 <a href="{{ url_for('login', redirectTo='index') }}">Login</a>
+<a href="{{ url_for('forum') }}">Forum</a>
 <a href="{{ url_for('register', redirectTo='index') }}">Register</a>
 {% endif %}
 <br>
@@ -19,6 +19,12 @@
   <li><a href='{{ url_for('forum', category="#YOLO") }}'>#YOLO</a></li>
   <li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>
   <li><a href='{{ url_for('forum', category="#WUT") }}'>#WUT</a></li>
+  <li><a href='{{ url_for('forum', category="#Food") }}'>#Food</a></li>
+  <li><a href='{{ url_for('forum', category="#Cars") }}'>#Cars</a></li>
+  <li><a href='{{ url_for('forum', category="#Funny") }}'>#Funny</a></li>
+  <li><a href='{{ url_for('forum', category="#Movies") }}'>#Movies</a></li>
+  <li><a href='{{ url_for('forum', category="#Programming") }}'>#Programming</a></li>
+  <li><a href='{{ url_for('forum', category="#Gaming") }}'>#Gaming</a></li>
  </ul>
 {% if category %}
 <h1>{{ category }} Questions</h1>
