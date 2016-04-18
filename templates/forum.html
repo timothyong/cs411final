@@ -36,7 +36,7 @@
   <li>
     <a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a>&nbsp;&nbsp;&nbsp;
     {% if username %}
-    {% if username == x[5] %}
+    {% if username == x[5] or isAdmin%}
     <a href='{{ url_for('deletequestion', qid=x[3]) }}'> Delete </a>
     {% endif %}
     {% endif %}

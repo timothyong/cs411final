@@ -82,16 +82,19 @@ def settings():
 @app.route("/forum")
 @app.route("/forum/<category>")
 def forum(category = None):
+    isAdmin = False
+    if 'username' in session:
+        isAdmin = dbutils.isUserAdmin(session['username'])
     if category is None:
         allQuestions = dbutils.getAllQuestions()
         if 'username' in session:
-            return render_template("forum.html", username=session['username'], questions=allQuestions)
+            return render_template("forum.html", username=session['username'], questions=allQuestions, isAdmin=isAdmin)
         else:
             return render_template("forum.html", questions=allQuestions)
     else:
         questions = dbutils.getQuestionsByCategory(category)
         if 'username' in session:
-            return render_template("forum.html", username=session['username'], questions=questions, category=category)
+            return render_template("forum.html", username=session['username'], questions=questions, category=category, isAdmin=isAdmin)
         else:
             return render_template("forum.html", questions=questions, category=category)
 
