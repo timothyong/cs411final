@@ -7,7 +7,7 @@
   <div class="navbar-left">
     <div class="navbar-logo">
       <span class="logo">
-        <a href="{{ url_for('index', redirectTo='index') }}">clarity</a>
+        <a href="{{ url_for('forum', redirectTo='index') }}">clarity</a>
       </span>
     </div> <!-- navbar-logo -->
   </div> <!-- navbar-left -->
@@ -16,13 +16,14 @@
     <div class="container">
       {% if username %}
       <a href="{{ url_for('settings') }}">{{ username }}</a>
+      <a href="{{ url_for('logout') }}">Log out</a>
       {% else %}
-      <a href='#'>penis</a>
+      <a id="login" href="{{ url_for('login', redirectTo='index') }}">LOG IN</a>
+      <a id="register" href="{{ url_for('register', redirectTo='index') }}">SIGN UP</a>
       {% endif %}
-      <a href="{{ url_for('forum') }}">Forum</a>
-      <a href="{{ url_for('logout') }}">Logoutasdfasdfsa</a>
+      <!-- <a href="{{ url_for('forum') }}">Forum</a> -->
+
     </div>
   </div> <!-- navbar-right -->
-
 
 </div>

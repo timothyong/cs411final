@@ -23,17 +23,44 @@ body {
 .navbar-left {
   float: left;
   display: inline-block;
-  background: yellow;
-  padding: 20px;
+/*  background: yellow;*/
+  padding: 10px;
 }
 
 .navbar-right {
-  padding: 20px;
+  padding: 12px;
   float: right;
   display: inline-block;
-  background: blue;
+/*  background: blue;*/
 }
 
+.navbar a {
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 5px;
+  border: 2px solid white;
+  padding: 7px;
+  display: inline-block;
+  min-width: 90px !important;
+}
+
+.navbar a:hover {
+  cursor: pointer;
+}
+
+.navbar #login {
+  color: rgba(125, 136, 255, 0.75);
+  border: 2px solid rgba(125, 136, 255, 0.75);
+}
+
+.navbar #register {
+  color: white;
+  background: rgba(125, 136, 255, 0.75);
+  border: 2px solid rgba(125, 136, 255, 1);
+}
+
+/* MODAL SHIET */
 .modal-container {
   height: 100%;
   padding: 0;
