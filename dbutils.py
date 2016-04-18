@@ -106,7 +106,10 @@ def isUserAdmin(username):
     c.execute('SELECT * FROM admins WHERE username=:username',
               {"username":username})
     x = c.fetchone()
-    return True
+    if x == None:
+        return False
+    else:
+        return True
 
 
 
