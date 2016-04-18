@@ -3,13 +3,26 @@
 </head>
 
 <!-- TURN THIS INTO A NAVBAR PROBABLY -->
-<div class="links-container">
-  {% if username %}
-	<a href="{{ url_for('settings') }}">{{ username }}</a>
-  {% else %}
-  <a href='#'>penis</a>
-  {% endif %}
-	<a href="{{ url_for('forum') }}">Forum</a>
-	<a href="{{ url_for('logout') }}">Logout</a>
-</div>
+<div class="navbar">
+  <div class="navbar-left">
+    <div class="navbar-logo">
+      <span class="logo">
+        <a href="{{ url_for('index', redirectTo='index') }}">clarity</a>
+      </span>
+    </div> <!-- navbar-logo -->
+  </div> <!-- navbar-left -->
 
+  <div class="navbar-right">
+    <div class="container">
+      {% if username %}
+      <a href="{{ url_for('settings') }}">{{ username }}</a>
+      {% else %}
+      <a href='#'>penis</a>
+      {% endif %}
+      <a href="{{ url_for('forum') }}">Forum</a>
+      <a href="{{ url_for('logout') }}">Logoutasdfasdfsa</a>
+    </div>
+  </div> <!-- navbar-right -->
+
+
+</div>

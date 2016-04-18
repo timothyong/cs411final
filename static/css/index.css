@@ -11,6 +11,29 @@ body {
   background-size: 140px;
 }
 
+/* NAVBAR SHIET */
+.navbar {
+  position: fixed;
+  background: white;
+  width: 100%;
+  padding: 0px;
+  border-bottom: 1px solid rgba(125, 136, 255, 0.5);
+}
+
+.navbar-left {
+  float: left;
+  display: inline-block;
+  background: yellow;
+  padding: 20px;
+}
+
+.navbar-right {
+  padding: 20px;
+  float: right;
+  display: inline-block;
+  background: blue;
+}
+
 .modal-container {
   height: 100%;
   padding: 0;
