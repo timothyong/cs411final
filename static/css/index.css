@@ -135,6 +135,29 @@ body {
   padding: 20px;
   padding-bottom: 30px;
   border: 1px solid rgba(125, 136, 255, 0.5);
+
+  -webkit-transition: 1s;
+}
+
+.notification {
+  font-family: 'Varela Round', sans-serif;
+  color: white;
+
+  width: 600px;
+  background: rgba(255, 115, 115, 1);
+  border-radius: 0px 0px 3px 3px;
+  border: 1px solid rgba(255, 80, 80, 1);
+
+  -webkit-transition: 0.75s ease-in-out;
+}
+
+.notif-active {
+  -webkit-transform: translate(0, 61px);
+}
+
+/* DONT NEED I THINK */
+.moveUp {
+  -webkit-transform: translate(0, -50px);
 }
 
 .modal span.logo {
@@ -280,5 +303,22 @@ body {
   font-family: 'Varela Round', sans-serif;
 }
 
+.question-page {
+  padding: 32px;
+}
+.poster-date {
+  font-size: 12px;
+  font-family: 'Varela Round', sans-serif;
+}
+.poster-name {
+  font-size: 30px;
+  font-family: 'Varela Round', sans-serif;
+  color: #EE7600;
+}
+.poster-block {
+  font-size: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  width: 600px;
+}
 
 

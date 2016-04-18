@@ -6,7 +6,7 @@
   <div class="modal-container">
     <div class="modal">
       <span class="logo">
-        <a href="{{ url_for('index', redirectTo='index') }}">clarity</a>
+        <a href="{{ url_for('forum') }}">clarity</a>
       </span>
       {% if error %}
       <font color=red>{{ error }}</font>
@@ -21,7 +21,7 @@
           <input type="password" name="password" placeholder="Password">
           <button type="submit" value="submit" name="button">Register</button>
         </form>
-        <span class="newUser">Already have an account? <a href="{{ url_for('login', redirectTo='index') }}">Log in!</a></span>
+        <span class="newUser">Already have an account? <a href="{{ url_for('login', redirectTo='forum') }}">Log in!</a></span>
       </div>
 
     </div>

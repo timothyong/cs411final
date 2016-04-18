@@ -1,50 +1,57 @@
-{% if username %}
-<a href="{{ url_for('settings') }}">{{ username }}</a>
-<a href="{{ url_for('logout') }}">Logout</a>
-{% else %}
-<a href="{{ url_for('login', redirectTo='index') }}">Login</a>
-<a href="{{ url_for('register', redirectTo='index') }}">Register</a>
-{% endif %}
-<br>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
 
-<h1>{{ question[0] }}</h1><h6> (category: {{ question[4] }})</h6>
-posted on: {{ question[1] }} by: {{ question[5] }}
+<div class="question-page">
 
-<br>
-{# question text #}
-{{ question[2] }}
-<br>
-{% if username %}
-{% if username == question[5] %}
-<a href='{{ url_for("deletequestion", qid=question[3]) }}'> Delete </a>
-{% endif %}
-{% endif %}
+	{% if username %}
+	<a href="{{ url_for('settings') }}">{{ username }}</a>
+	<a href="{{ url_for('logout') }}">Logout</a>
+	{% else %}
+	<a href="{{ url_for('login', redirectTo='index') }}">Login</a>
+	<a href="{{ url_for('register', redirectTo='index') }}">Register</a>
+	{% endif %}
+	<br>
 
-<hr>
-<hr>
-{% for x in answers %}
-<div>
-  upvotes: {{ x[0] }}
-  <br>
-  posted on: {{ x[1] }} by: {{ x[5] }}
-  <br>
-  {# answer text #}
-  {{ x[3] }}
-  <br>
-  {% if username %}
-  {% if username == x[5] %}
-  <a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'> Delete </a>
-  {% endif %}
-  {% endif %}
-  
+	<h1>{{ question[0] }}</h1>
+	<h6> (category: {{ question[4] }})</h6>
+	{{ question[5] }} on {{ question[1] }}
+
+	<br>
+	{# question text #}
+	{{ question[2] }}
+	<br>
+	{% if username %}
+	{% if username == question[5] or isAdmin %}
+	<a href='{{ url_for("deletequestion", qid=question[3]) }}'> Delete </a>
+	{% endif %}
+	{% endif %}
+
+	<hr>
+	<hr>
+	{% for x in answers %}
+	<div>
+	  {{ x[0] }} <span class="poster-name">{{ x[5] }}</span> <span class="poster-date">on {{ x[1] }}</span>
+	  <div class="poster-block">
+		{{ x[3] }}
+	  </div>
+	  <br>
+	  {% if username %}
+	  {% if username == x[5] or isAdmin %}
+	  <a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'> Delete </a>
+	  {% endif %}
+	  {% endif %}
+	  
+	</div>
+	<hr>
+	{% endfor %}
+
+
+	{% if username %}
+	<form method="POST">
+	  <textarea name="answer" rows="4" cols="50">  </textarea>
+	  <button type="submit" value="submit" name="button">Answer</button>  
+	</form>
+	{% endif %}
+
 </div>
-<hr>
-{% endfor %}
-
-
-{% if username %}
-<form method="POST">
-  <textarea name="answer" rows="4" cols="50">  </textarea>
-  <button type="submit" value="submit" name="button">Answer</button>  
-</form>
-{% endif %}
