@@ -9,11 +9,14 @@ body {
   background: url(../img/candypattern2.svg);
   background-color: rgba(125,136,255,0.2);
   background-size: 140px;
+  padding-top: 63px;
 }
 
 /* NAVBAR SHIET */
 .navbar {
   position: fixed;
+  top: 0;
+  left: 0;
   background: white;
   width: 100%;
   padding: 0px;
@@ -24,11 +27,11 @@ body {
   float: left;
   display: inline-block;
 /*  background: yellow;*/
-  padding: 10px;
+  padding: 12px 16px;
 }
 
 .navbar-right {
-  padding: 12px;
+  padding: 12px 16px;
   float: right;
   display: inline-block;
 /*  background: blue;*/
@@ -42,7 +45,12 @@ body {
   border: 2px solid white;
   padding: 7px;
   display: inline-block;
-  min-width: 90px !important;
+  min-width: 94px !important;
+}
+
+.navbar a + a ,
+.navbar span + a {
+  margin-left: 10px;
 }
 
 .navbar a:hover {
@@ -50,14 +58,55 @@ body {
 }
 
 .navbar #login {
+  color: rgba(125, 136, 255, 1);
+  border: 2px solid rgba(125, 136, 255, 0.85);
+}
+
+.navbar #login:hover {
   color: rgba(125, 136, 255, 0.75);
   border: 2px solid rgba(125, 136, 255, 0.75);
 }
 
-.navbar #register {
+.navbar #login:active {
+  color: rgba(125, 136, 255, 1);
+  border: 2px solid rgba(125, 136, 255, 1);
+}
+
+.navbar #register,
+.navbar #logout {
   color: white;
   background: rgba(125, 136, 255, 0.75);
   border: 2px solid rgba(125, 136, 255, 1);
+}
+
+.navbar #register:hover,
+.navbar #logout:hover {
+  background: rgba(125, 136, 255, 0.65);
+  border: 2px solid rgba(125, 136, 255, 0.85);
+}
+
+.navbar #register:active,
+.navbar #logout:active {
+  background: rgba(125, 136, 255, 0.85);
+  border: 2px solid rgba(125, 136, 255, 1);
+}
+
+.navbar span#hello {
+  font-family: 'Varela Round', sans-serif;
+}
+
+.navbar #username {
+  padding: 0px;
+  min-width: 0 !important;
+  color: rgba(125, 136, 255, 0.75);
+}
+
+.navbar #username:hover {
+  color: rgba(125, 136, 255, 0.65);
+}
+
+.navbar #username:active {
+  color: rgba(125, 136, 255, 0.85);
 }
 
 /* MODAL SHIET */

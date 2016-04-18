@@ -15,8 +15,8 @@
   <div class="navbar-right">
     <div class="container">
       {% if username %}
-      <a href="{{ url_for('settings') }}">{{ username }}</a>
-      <a href="{{ url_for('logout') }}">Log out</a>
+      <span id="hello" >Hello, <a id="username" href="{{ url_for('settings') }}">{{ username }}</a></span>
+      <a id="logout" href="{{ url_for('logout') }}">LOG OUT</a>
       {% else %}
       <a id="login" href="{{ url_for('login', redirectTo='index') }}">LOG IN</a>
       <a id="register" href="{{ url_for('register', redirectTo='index') }}">SIGN UP</a>
