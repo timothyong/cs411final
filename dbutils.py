@@ -101,3 +101,26 @@ def changePassword(username, password, newpassword):
                   {"newpassword":newpassword, "username":username})
         conn.commit()
         return "Password successfully changed"
+
+def isUserAdmin(username):
+    c.execute('SELECT * FROM admins WHERE username=:username',
+              {"username":username})
+    x = c.fetchone()
+    return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		

@@ -32,5 +32,15 @@ c.execute('''CREATE TABLE questions (title TEXT,
                                      qid INTEGER PRIMARY KEY AUTOINCREMENT,
                                      category TEXT,
                                      username TEXT)''')
+	
+#admins table
+#contains a list of the admins usernames	
+c.execute('''CREATE TABLE admins (username TEXT)''')
+
+
+#add admins
+c.execute('''INSERT INTO admins VALUES ('admin')''')
+
+
 conn.commit()
 conn.close()

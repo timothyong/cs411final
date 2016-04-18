@@ -71,11 +71,13 @@ body {
 }
 
 /* login form for login.html */
+#change-password-form,
 #login-form,
 #register-form {
   margin-bottom: 0px;
 }
 
+#change-password-form input,
 #login-form input,
 #register-form input {
   box-sizing: border-box;
@@ -95,28 +97,35 @@ body {
 
 }
 
+#change-password-form input::-webkit-input-placeholder,
 #login-form input::-webkit-input-placeholder,
 #register-form input::-webkit-input-placeholder {
   color: rgba(125, 136, 255, 0.5);
 }
 
 /* Firefox 18- */
+#change-password-form input::-moz-placeholder,
 #login-form input:-moz-placeholder,
 #register-form input:-moz-placeholder {
   color: rgba(125, 136, 255, 0.5);
 }
 
 /* Firefox 19+ */
+#change-password-form input::-moz-placeholder,
 #login-form input::-moz-placeholder,
 #register-form input::-moz-placeholder {
   color: rgba(125, 136, 255, 0.5);
 }
 
+
+#change-password-form input:-ms-input-placeholder,
 #login-form input:-ms-input-placeholder,
 #register-form input:-ms-input-placeholder  {
   color: rgba(125, 136, 255, 0.5);
 }
 
+
+#change-password-form input:focus,
 #login-form input:focus,
 #register-form input:focus {
   border: 1px solid rgba(125, 136, 255, 1);
@@ -124,6 +133,7 @@ body {
   color: rgb(125, 136, 255);
 }
 
+#change-password-form button,
 #login-form button,
 #register-form button {
   color: white;
@@ -138,12 +148,14 @@ body {
   outline: none;
 }
 
+#change-password-form button:hover,
 #login-form button:hover,
 .links-container a:hover {
   cursor: pointer;
   background: rgba(125, 136, 255, 0.65);
 }
 
+#change-password-form button:active,
 #login-form button:active,
 .links-container a:active {
   background: rgba(125, 136, 255, 0.85);
@@ -163,3 +175,11 @@ body {
   text-decoration: none;
   background: none;
 }
+
+.settings-info {
+  font-size: 30px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+
+
