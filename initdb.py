@@ -5,7 +5,7 @@ c = conn.cursor()
 
 
 # users table
-c.execute('''CREATE TABLE users (gender TEXT, rank INTEGER, username TEXT PRIMARY KEY, password TEXT, name TEXT)''')
+c.execute('''CREATE TABLE users (gender TEXT, rank INTEGER, username TEXT PRIMARY KEY, password TEXT, name TEXT, voted TEXT)''')
 #c.execute('''INSERT INTO users VALUES ('male', 1, 'admin', 'gtf0myface', 'Timothy Ong')''')
 
 
@@ -35,11 +35,11 @@ c.execute('''CREATE TABLE questions (title TEXT,
 	
 #admins table
 #contains a list of the admins usernames	
-c.execute('''CREATE TABLE admins (username TEXT)''')
+#c.execute('''CREATE TABLE admins (username TEXT)''')
 
 
 #add admins
-c.execute('''INSERT INTO admins VALUES ('admin')''')
+#c.execute('''INSERT INTO admins VALUES ('admin')''')
 
 
 conn.commit()
