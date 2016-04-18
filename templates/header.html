@@ -2,8 +2,13 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 
+<!-- TURN THIS INTO A NAVBAR PROBABLY -->
 <div class="links-container">
+  {% if username %}
 	<a href="{{ url_for('settings') }}">{{ username }}</a>
+  {% else %}
+  <a href='#'>penis</a>
+  {% endif %}
 	<a href="{{ url_for('forum') }}">Forum</a>
 	<a href="{{ url_for('logout') }}">Logout</a>
 </div>
