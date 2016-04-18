@@ -111,7 +111,15 @@ def isUserAdmin(username):
     else:
         return True
 
-
+def incAnswer(aid):
+    c.execute('UPDATE answers SET upvotes=upvotes+1 WHERE aid=:aid', {"aid":aid})
+    conn.commit()
+    return;
+    
+    
+    
+    
+    
 
 
 

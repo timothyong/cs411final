@@ -126,6 +126,19 @@ def deletequestion(qid = None):
             return redirect(url_for("forum"))
         else:
             return redirect(url_for("error"))
+            
+@app.route("/upvote/<username>/<aid>/<qid>")
+def upvote(username = None, aid = None, qid = None):
+    if username is None or aid is None or qid is None:
+        return redirect(url_for("error"))
+    else:
+        answer = dbutils.incAnswer(str(aid))
+    return redirect(url_for("question", qid=qid))
+    
+        
+        
+        
+        
 
 @app.route("/deleteanswer/<aid>/<qid>")
 def deleteanswer(aid = None, qid = None):

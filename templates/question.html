@@ -5,8 +5,7 @@
 <div class="question-page">
 
 	{% if username %}
-	<a href="{{ url_for('settings') }}">{{ username }}</a>
-	<a href="{{ url_for('logout') }}">Logout</a>
+	{% include 'header.html' %}
 	{% else %}
 	<a href="{{ url_for('login', redirectTo='index') }}">Login</a>
 	<a href="{{ url_for('register', redirectTo='index') }}">Register</a>
@@ -15,12 +14,12 @@
 
 	<h1>{{ question[0] }}</h1>
 	<h6> (category: {{ question[4] }})</h6>
-	{{ question[5] }} on {{ question[1] }}
+	<span class="post-name">{{ question[5] }}</span> <span class="post-date">on {{ question[1] }}</span>
 
-	<br>
-	{# question text #}
-	{{ question[2] }}
-	<br>
+	<div class="post-comment">
+		{{ question[2] }}
+	</div>
+	
 	{% if username %}
 	{% if username == question[5] or isAdmin %}
 	<a href='{{ url_for("deletequestion", qid=question[3]) }}'> Delete </a>
@@ -29,29 +28,50 @@
 
 	<hr>
 	<hr>
+	<hr>
 	{% for x in answers %}
 	<div>
-	  {{ x[0] }} <span class="poster-name">{{ x[5] }}</span> <span class="poster-date">on {{ x[1] }}</span>
-	  <div class="poster-block">
-		{{ x[3] }}
-	  </div>
-	  <br>
-	  {% if username %}
-	  {% if username == x[5] or isAdmin %}
-	  <a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'> Delete </a>
-	  {% endif %}
-	  {% endif %}
-	  
+	
+		<div id="question-score-div">
+			{% if username %}
+			<a href="{{ url_for('upvote', username=username, aid=x[2], qid=x[4]) }}">{{ x[0] }}</a>
+			{% else %}
+			<a href="{{ url_for('login', redirectTo='forum') }}">{{ x[0] }}</a>
+			{% endif %}
+		</div>
+
+		<div id="question-post-div">
+			<span class="post-name">
+				{{ x[5] }}
+			</span>
+			
+			<span class="post-date">
+				on {{ x[1] }}
+			</span>
+			
+			<div class="post-comment">
+				{{ x[3] }}
+			</div>
+			<br>
+			{% if username %}
+			{% if username == x[5] or isAdmin %}
+			<a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'> Delete </a>
+			{% endif %}
+			{% endif %}
+		</div>
+		
 	</div>
 	<hr>
 	{% endfor %}
 
 
 	{% if username %}
-	<form method="POST">
-	  <textarea name="answer" rows="4" cols="50">  </textarea>
-	  <button type="submit" value="submit" name="button">Answer</button>  
-	</form>
+	<div class="links-container" id="post-button">
+		<form method="POST">
+			<textarea name="answer" rows="4" style="width: 360px; max-width: 360px;"></textarea><br>
+			<button type="submit" value="submit" name="button" style="width: 360px;">Post</button>
+		</form>
+	</div>
 	{% endif %}
 
 </div>
