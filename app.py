@@ -144,6 +144,9 @@ def deleteanswer(aid = None, qid = None):
 
 @app.route("/question/<qid>", methods=["GET", "POST"])
 def question(qid = None):
+    isAdmin = False
+    if 'username' in session:
+        isAdmin = dbutils.isUserAdmin(session['username'])
     if qid is None:
         return redirect(url_for("error"))
     else:
@@ -162,7 +165,7 @@ def question(qid = None):
                 newArr[1] = time.ctime(newArr[1])
                 answersArr.append(newArr)
             if 'username' in session:
-                return render_template("question.html", username=session['username'], question=questionArr, answers=answersArr)
+                return render_template("question.html", username=session['username'], question=questionArr, answers=answersArr, isAdmin=isAdmin)
             else:
                 return render_template("question.html", question=questionArr, answers=answersArr)
         else:
