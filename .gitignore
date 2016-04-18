@@ -67,7 +67,8 @@ venv/
 #temp shit
 test.py
 
-#fuk the .db
-clarity.db
+#database
+*.db
+*.DS_Store
 
 
