@@ -6,3 +6,4 @@
 + Make name required for registration?
 + Make fonts global with @font-face
 + Add error notifications for register.html
++ Fix button states for register.html
