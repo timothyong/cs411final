@@ -65,6 +65,9 @@ def register(redirectTo = None):
             password = request.form['password'].encode('ascii', 'ignore')
             if len(password) < 6:
                 return render_template("register.html", error = "Password must be at least 6 characters long")
+            passwordconf = request.form['passwordconf'].encode('ascii', 'ignore')
+            if passwordconf != password:
+                return render_template("register.html", error = "Passwords did not match")
             name = request.form['name'].encode('ascii', 'ignore')
             if len(name) < 3:
                 return render_template("register.html", error = "Please include first and last name")
