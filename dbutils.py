@@ -125,11 +125,17 @@ def changePassword(username, password, newpassword):
         conn.commit()
         return "Password successfully changed"
 
-
 '''
 def isUserAdmin(username):
+    return False'''
+'''
     c.execute('SELECT * FROM admins WHERE username=:username',
               {"username":username})
     x = c.fetchone()
-    return True
+
+    if x == None:
+        return False
+    else:
+        return True
 '''
+    
