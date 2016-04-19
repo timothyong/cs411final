@@ -219,6 +219,14 @@ body {
 
 }
 
+#change-password-form input:focus,
+#login-form input:focus,
+#register-form input:focus {
+  border: 1px solid rgba(125, 136, 255, 1);
+  outline: none;
+  color: rgb(125, 136, 255);
+}
+
 #change-password-form input::-webkit-input-placeholder,
 #login-form input::-webkit-input-placeholder,
 #register-form input::-webkit-input-placeholder {
@@ -247,13 +255,6 @@ body {
 }
 
 
-#change-password-form input:focus,
-#login-form input:focus,
-#register-form input:focus {
-  border: 1px solid rgba(125, 136, 255, 1);
-  outline: none;
-  color: rgb(125, 136, 255);
-}
 
 #change-password-form button,
 #login-form button,

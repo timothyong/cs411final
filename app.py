@@ -59,6 +59,9 @@ def register(redirectTo = None):
             gender = 'M'
             #gender = request.form['gender']
             #assert (gender in ["M", "F"])
+            name = request.form['name'].encode('ascii', 'ignore')
+            if len(name) < 3:
+                return render_template("register.html", error = "Please include first and last name")
             username = request.form['username'].encode('ascii', 'ignore').strip()
             if len(username) < 4:
                 return render_template("register.html", error = "Username must be at least 4 characters long")
@@ -68,9 +71,7 @@ def register(redirectTo = None):
             passwordconf = request.form['passwordconf'].encode('ascii', 'ignore')
             if passwordconf != password:
                 return render_template("register.html", error = "Passwords did not match")
-            name = request.form['name'].encode('ascii', 'ignore')
-            if len(name) < 3:
-                return render_template("register.html", error = "Please include first and last name")
+
 
             retval = dbutils.register(gender, username, password, name)
             if retval == "True":
@@ -157,7 +158,7 @@ def deleteanswer(aid = None, qid = None):
             return redirect(url_for("question", qid=qid))
         else:
             return redirect(url_for("error"))
-    
+
 @app.route("/question/<qid>", methods=["GET", "POST"])
 def question(qid = None):
     if qid is None:
