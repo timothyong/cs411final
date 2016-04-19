@@ -3,15 +3,30 @@
 </head>
 
 <body>
+  <div class="notification-container" style="display: -webkit-flex; justify-content: center;">
+    <div class="notification" style="text-align:center;padding: 20px; margin-top: -62px;">
+      {% if error %}
+      {{ error }}
+      <script>
+        var notif = document.querySelector('div.notification');
+
+        setTimeout(function() {
+          notif.className += " notif-active";
+        }, 500);
+
+        setTimeout(function() {
+          notif.className = notif.className.replace(" notif-active", "");
+        }, 3500);
+      </script>
+      {% endif %}
+    </div>
+  </div>
+
   <div class="modal-container">
     <div class="modal">
       <span class="logo">
-
         <a href="{{ url_for('forum') }}">clarity</a>
       </span>
-      {% if error %}
-      <font color=red>{{ error }}</font>
-      {% endif %}
 
       <div class="links-container" id="register-form">
         <form method="POST">
