@@ -12,7 +12,7 @@ def getVotes(username):
     return c.fetchone()
 
 def updateVoted(username, voted):
-    c.execute('UPDATE users SET voted=:voted WHERE username=:user', {"voted":voted, "username":username})
+    c.execute('UPDATE users SET voted=:voted WHERE username=:username', {"voted":voted, "username":username})
     conn.commit()
     return True
 
