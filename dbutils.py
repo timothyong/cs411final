@@ -128,22 +128,32 @@ def changePassword(username, password, newpassword):
 def searchQuestions(searchTokens):
     
     c.execute('SELECT * FROM questions')
-    list = c.fetchall();
+    questionList = c.fetchall();
     
-    results = [] # [(ints, strings)]
+    results = []
     
-    for entry in list: # for each entry in table
+    for entry in questionList: # for questions
         matchStrength = 0
         postWords = entry[0] + " " + entry[2] # title + " " + question_text
         
+        c.execute('SELECT * FROM answers WHERE qid=:qid', {"qid":entry[3]})
+        answerList = c.fetchall();
         
-        for word in searchTokens: # for each search token
+        answersString = ""
+        upvoteSum = 0 # total upvotes by answers in this question
+        for answer in answerList:
+            upvoteSum += answer[0]
+            answersString += " " + answer[3]
+            
+        postWords += " " + answersString
+        
+        for word in searchTokens: # for search token
             matches = postWords.lower().count(word.lower())
             if(matches != 0):
                 matchStrength += matches
             
         if matchStrength != 0:
-            results.append((matchStrength, entry[0], entry[3])) # TODO shoudl use qid, not title
+            results.append((matchStrength * (upvoteSum+1), entry[0], entry[3]))
             
     return results
         
