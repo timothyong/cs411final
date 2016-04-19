@@ -187,6 +187,9 @@ def question(qid = None):
             dbutils.insertAnswer(calendar.timegm(time.gmtime()), answerText, qid, session['username'])
             return redirect(url_for("question", qid=qid))
 
+            
+def getKey(item):
+    return item[0]
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method == "GET":
@@ -194,7 +197,14 @@ def search():
     else:
         searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
         searchTokens = searchString.split(' ')
-        searchResults = searchTokens
+        
+        initResults = dbutils.searchQuestions(searchTokens)
+        sort = sorted(initResults, key=getKey, reverse=True)
+        
+        searchResults = []
+        for entry in sort:
+            searchResults.append(entry)
+        
         return render_template("search.html", results=searchResults)
         
             

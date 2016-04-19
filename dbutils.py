@@ -143,7 +143,7 @@ def searchQuestions(searchTokens):
                 matchStrength += matches
             
         if matchStrength != 0:
-            results.append((matchStrength, entry[0])) # TODO shoudl use qid, not title
+            results.append((matchStrength, entry[0], entry[3])) # TODO shoudl use qid, not title
             
     return results
         

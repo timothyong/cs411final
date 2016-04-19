@@ -14,7 +14,7 @@ Results:
 {% if results %}
 {% for x in results %}
 <div>
-	{{ x }}
+    <a href='{{ url_for('question', qid=x[2]) }}'>{{ x[1] }}</a>&nbsp;&nbsp;&nbsp;
 </div>
 {% endfor %}
 {% endif %}
