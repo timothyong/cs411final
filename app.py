@@ -59,9 +59,15 @@ def register(redirectTo = None):
             gender = 'M'
             #gender = request.form['gender']
             #assert (gender in ["M", "F"])
-            username = request.form['username'].encode('ascii', 'ignore')
+            username = request.form['username'].encode('ascii', 'ignore').strip()
+            if len(username) < 4:
+                return render_template("register.html", error = "Username must be at least 4 characters long")
             password = request.form['password'].encode('ascii', 'ignore')
+            if len(password) < 6:
+                return render_template("register.html", error = "Password must be at least 6 characters long")
             name = request.form['name'].encode('ascii', 'ignore')
+            if len(name) < 3:
+                return render_template("register.html", error = "Please include first and last name")
 
             retval = dbutils.register(gender, username, password, name)
             if retval == "True":
@@ -139,19 +145,6 @@ def deletequestion(qid = None):
             return redirect(url_for("forum"))
         else:
             return redirect(url_for("error"))
-            
-@app.route("/upvote/<username>/<aid>/<qid>")
-def upvote(username = None, aid = None, qid = None):
-    if username is None or aid is None or qid is None:
-        return redirect(url_for("error"))
-    else:
-        answer = dbutils.incAnswer(str(aid))
-    return redirect(url_for("question", qid=qid))
-    
-        
-        
-        
-        
 
 @app.route("/deleteanswer/<aid>/<qid>")
 def deleteanswer(aid = None, qid = None):
