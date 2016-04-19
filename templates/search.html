@@ -1,0 +1,20 @@
+{% include 'header.html' %}
+<body>
+	<form method="POST">
+		<input type="text" name="searchfield" placeholder="What are you looking for?">
+		<button type="submit" value="submit" name="button">Search</button>
+	</form>
+	search page
+</body>
+
+<br>
+<br>
+<br>
+Results:
+{% if results %}
+{% for x in results %}
+<div>
+	{{ x }}
+</div>
+{% endfor %}
+{% endif %}

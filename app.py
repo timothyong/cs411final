@@ -187,6 +187,19 @@ def question(qid = None):
             dbutils.insertAnswer(calendar.timegm(time.gmtime()), answerText, qid, session['username'])
             return redirect(url_for("question", qid=qid))
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method == "GET":
+        return render_template("search.html")
+    else:
+        searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
+        searchTokens = searchString.split(' ')
+        searchResults = searchTokens
+        return render_template("search.html", results=searchResults)
+        
+            
+            
+        
 
 @app.route("/vote/<aid>/<updown>")
 def vote(aid = None, updown = None):
