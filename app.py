@@ -211,7 +211,7 @@ def vote(aid = None, updown = None):
         voted = dbutils.getVotes(user)[0].split()
         question = answer[4]
         userUp = answer[5]
-        rank = dbutils.getRank(userUp)
+        rank = dbutils.getUserRank(userUp)
         upvotes = answer[0]
         if updown == "up":
             upvotes += 1
