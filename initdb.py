@@ -32,10 +32,10 @@ c.execute('''CREATE TABLE questions (title TEXT,
                                      qid INTEGER PRIMARY KEY AUTOINCREMENT,
                                      category TEXT,
                                      username TEXT)''')
-
+	
 #admins table
-#contains a list of the admins usernames
-c.execute('''CREATE TABLE admins (username TEXT)''')
+#contains a list of the admins usernames	
+#c.execute('''CREATE TABLE admins (username TEXT)''')
 
 
 #add admins

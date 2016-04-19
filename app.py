@@ -140,9 +140,6 @@ def deletequestion(qid = None):
         if session['username'] == question[5]:
             dbutils.deleteQuestion(str(qid))
             return redirect(url_for("forum"))
-        elif dbutils.isUserAdmin(session['username']):
-            dbutils.deleteQuestion(str(qid))
-            return redirect(url_for("forum"))
         else:
             return redirect(url_for("error"))
 
@@ -155,17 +152,11 @@ def deleteanswer(aid = None, qid = None):
         if session['username'] == answer[5]:
             dbutils.deleteAnswer(str(aid))
             return redirect(url_for("question", qid=qid))
-        elif dbutils.isUserAdmin(session['username']):
-            dbutils.deleteAnswer(str(aid))
-            return redirect(url_for("question", qid=qid))
         else:
             return redirect(url_for("error"))
-
+    
 @app.route("/question/<qid>", methods=["GET", "POST"])
 def question(qid = None):
-    isAdmin = False
-    if 'username' in session:
-        isAdmin = dbutils.isUserAdmin(session['username'])
     if qid is None:
         return redirect(url_for("error"))
     else:
@@ -184,13 +175,14 @@ def question(qid = None):
                 newArr[1] = time.ctime(newArr[1])
                 answersArr.append(newArr)
             if 'username' in session:
-                return render_template("question.html", username=session['username'], question=questionArr, answers=answersArr, isAdmin=isAdmin)
+                return render_template("question.html", username=session['username'], question=questionArr, answers=answersArr)
             else:
                 return render_template("question.html", question=questionArr, answers=answersArr)
         else:
             answerText = request.form['answer'].encode('ascii', 'ignore')
             dbutils.insertAnswer(calendar.timegm(time.gmtime()), answerText, qid, session['username'])
             return redirect(url_for("question", qid=qid))
+
 
 @app.route("/vote/<aid>/<updown>")
 def vote(aid = None, updown = None):
