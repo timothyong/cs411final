@@ -1,5 +1,9 @@
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+  <link rel="shortcut icon" type="image/ico" href="../static/img/favicon.ico">
+
+  <title>Log in to your account | Clarity</title>
 </head>
 
 <body>
@@ -26,8 +30,7 @@
     <div class="modal">
 
       <span class="logo">
-        <!-- <a href="{{ url_for('forum') }}">clarity</a> -->
-        <a>clarity</a>
+        <a href="{{ url_for('forum') }}">clarity</a>
       </span>
       <div class="links-container" id="login-form">
         <form method="POST">
@@ -35,6 +38,11 @@
           <input type="password" name="password" placeholder="Password">
           <button type="submit" value="submit" name="button">Login</button>
         </form>
+        <script>
+          setTimeout(function() {
+            document.querySelector('input').focus();
+          }, 10);
+        </script>
         <span class="newUser">New user? <a href="{{ url_for('register', redirectTo='forum') }}">Register</a> now!</span>
       </div>
     </div>

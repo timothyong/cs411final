@@ -273,6 +273,7 @@ body {
 
 #change-password-form button:hover,
 #login-form button:hover,
+#register-form button:hover,
 #post-button button:hover,
 .links-container a:hover {
   cursor: pointer;
@@ -281,6 +282,7 @@ body {
 
 #change-password-form button:active,
 #login-form button:active,
+#register-form button:active,
 #post-button button:active,
 .links-container a:active {
   background: rgba(125, 136, 255, 0.85);

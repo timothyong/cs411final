@@ -125,10 +125,9 @@ def changePassword(username, password, newpassword):
         conn.commit()
         return "Password successfully changed"
 
-
-
+'''
 def isUserAdmin(username):
-    return False
+    return False'''
 '''
     c.execute('SELECT * FROM admins WHERE username=:username',
               {"username":username})
@@ -137,11 +136,6 @@ def isUserAdmin(username):
     if x == None:
         return False
     else:
-        return True'''
-
-def incAnswer(aid):
-    c.execute('UPDATE answers SET upvotes=upvotes+1 WHERE aid=:aid', {"aid":aid})
-    conn.commit()
-    return;
-    
+        return True
+'''
     
