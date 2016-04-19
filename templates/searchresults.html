@@ -1,0 +1,38 @@
+{% include 'header.html' %}
+
+<!--
+{% for x in answers %}
+<div>
+
+	<div id="question-score-div">
+		{% if username %}
+		<a href="{{ url_for('upvote', username=username, aid=x[2], qid=x[4]) }}">{{ x[0] }}</a>
+		{% else %}
+		<a href="{{ url_for('login', redirectTo='forum') }}">{{ x[0] }}</a>
+		{% endif %}
+	</div>
+
+	<div id="question-post-div">
+		<span class="post-name">
+			{{ x[5] }}
+		</span>
+		
+		<span class="post-date">
+			on {{ x[1] }}
+		</span>
+		
+		<div class="post-comment">
+			{{ x[3] }}
+		</div>
+		<br>
+		{% if username %}
+		{% if username == x[5] or isAdmin %}
+		<a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'> Delete </a>
+		{% endif %}
+		{% endif %}
+	</div>
+	
+</div>
+<hr>
+{% endfor %}
+-->

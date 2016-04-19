@@ -128,6 +128,8 @@ def changePassword(username, password, newpassword):
 
 
 def isUserAdmin(username):
+    return False
+'''
     c.execute('SELECT * FROM admins WHERE username=:username',
               {"username":username})
     x = c.fetchone()
@@ -135,7 +137,7 @@ def isUserAdmin(username):
     if x == None:
         return False
     else:
-        return True
+        return True'''
 
 def incAnswer(aid):
     c.execute('UPDATE answers SET upvotes=upvotes+1 WHERE aid=:aid', {"aid":aid})
