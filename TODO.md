@@ -10,3 +10,5 @@
 + say "Hello, FIRSTNAME" instead of "Hello, USERNAME"
 + Links for login/register redirect @ bottom of modals need hover/active states
 + Maybe touch up notifications with ERROR: header or something
++ Make shit unselectable
++ ~~Autoselect first input forms on login/register for that good UX tho~~

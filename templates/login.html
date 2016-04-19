@@ -38,6 +38,11 @@
           <input type="password" name="password" placeholder="Password">
           <button type="submit" value="submit" name="button">Login</button>
         </form>
+        <script>
+          setTimeout(function() {
+            document.querySelector('input').focus();
+          }, 10);
+        </script>
         <span class="newUser">New user? <a href="{{ url_for('register', redirectTo='forum') }}">Register</a> now!</span>
       </div>
     </div>
