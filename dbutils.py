@@ -125,6 +125,28 @@ def changePassword(username, password, newpassword):
         conn.commit()
         return "Password successfully changed"
 
+def searchQuestions(searchTokens):
+    
+    c.execute('SELECT * FROM questions')
+    list = c.fetchall();
+    
+    results = [] # [(ints, strings)]
+    
+    for entry in list: # for each entry in table
+        matchStrength = 0
+        postWords = entry[0] + " " + entry[2] # title + " " + question_text
+        
+        
+        for word in searchTokens: # for each search token
+            matches = postWords.lower().count(word.lower())
+            if(matches != 0):
+                matchStrength += matches
+            
+        if matchStrength != 0:
+            results.append((matchStrength, entry[0])) # TODO shoudl use qid, not title
+            
+    return results
+        
 '''
 def isUserAdmin(username):
     return False'''
