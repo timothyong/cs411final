@@ -129,11 +129,24 @@ def postquestion():
         if request.method == "GET":
             return render_template("postquestion.html", username=session['username'])
         else:
-            questionTitle = request.form['questionTitle'].encode('ascii', 'ignore')
-            questionText = request.form['questionText'].encode('ascii', 'ignore')
-            category = request.form['category']
-            dbutils.insertQuestion(questionTitle, calendar.timegm(time.gmtime()), questionText, category, session['username'])
-            return redirect(url_for("forum"))
+            if request.form['submit'] == 'Post':
+                questionTitle = request.form['questionTitle'].encode('ascii', 'ignore')
+                questionText = request.form['questionText'].encode('ascii', 'ignore')
+                category = request.form['category']
+                dbutils.insertQuestion(questionTitle, calendar.timegm(time.gmtime()), questionText, category, session['username'])
+                return redirect(url_for("forum"))
+            elif request.form['submit'] == 'Find Answer':
+                searchString = request.form['questionTitle'].encode('ascii', 'ignore').strip()
+                searchTokens = searchString.split(' ')
+                
+                sort = dbutils.searchQuestions(searchTokens)
+                
+                results = []
+                numResults = min(5, len(sort))
+                for i in range(numResults):
+                    results.append(sort[i])
+                
+                return render_template("postquestion.html", results=results)
 
 @app.route("/deletequestion/<qid>")
 def deletequestion(qid = None):
@@ -187,6 +200,28 @@ def question(qid = None):
             dbutils.insertAnswer(calendar.timegm(time.gmtime()), answerText, qid, session['username'])
             return redirect(url_for("question", qid=qid))
 
+            
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method == "GET":
+        if 'username' in session:
+            return render_template("search.html", username=session['username'])
+        else:
+            return render_template("search.html")   
+    else:
+        searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
+        searchTokens = searchString.split(' ')
+        
+        sort = dbutils.searchQuestions(searchTokens)
+        
+        searchResults = []
+        for entry in sort:
+            searchResults.append(entry)
+        if 'username' in session:
+            return render_template("search.html", results=searchResults, username=session['username'])
+        else:
+            return render_template("search.html", results=searchResults)
 
 @app.route("/vote/<aid>/<updown>")
 def vote(aid = None, updown = None):
@@ -198,7 +233,7 @@ def vote(aid = None, updown = None):
         voted = dbutils.getVotes(user)[0].split()
         question = answer[4]
         userUp = answer[5]
-        rank = dbutils.getRank(userUp)
+        rank = dbutils.getUserRank(userUp)
         upvotes = answer[0]
         if updown == "up":
             upvotes += 1

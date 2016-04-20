@@ -67,6 +67,9 @@ venv/
 #temp shit
 test.py
 
+#webstorm
+.idea
+
 #database
 *.db
 #mac specific files

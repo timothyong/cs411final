@@ -373,6 +373,20 @@ body {
   margin: 0;
   padding: 0;
 }
+.question-list {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 25px;
+  width: 300px;
+  text-decoration: none;
+}
+li:nth-child(even) {
+  background: rgba(0,50,255,0.5);
+  text-decoration: none;
+}
+li:nth-child(odd) {
+  background: rgba(255,150,10,0.5);
+}
+
 #question-score-div {
   color: DarkGreen;
   font-size: 30px;

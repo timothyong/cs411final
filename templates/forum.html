@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <br>
   <h1>Sort by category</h1>
-  <ul>
+  <ul class="question-list">
     <li><a href='{{ url_for('forum') }}'>All Questions</a></li>
     <li><a href='{{ url_for('forum', category="#YOLO") }}'>#YOLO</a></li>
     <li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>
@@ -30,7 +30,7 @@
   {% else %}
   <h1>All Questions</h1>
   {% endif %}
-  <ul>
+  <ul class="question-list">
     {% for x in questions %}
     <li>
       <a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a>&nbsp;&nbsp;&nbsp;
