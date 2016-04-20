@@ -13,7 +13,10 @@
     <div class="sidebar-wrapper">
       <div class="sidebar-left">
         <!-- This will go to Categories page maybe -->
-        <span class="sidebar-header"><a href="#">Categories</a></span>
+        <div class="sidebar-header">
+          <a href="#">Categories</a>
+          <hr>
+        </div>
         <ul class="categories-list">
           <li><a href='{{ url_for('forum', category="#YOLO") }}'>#YOLO</a></li>
           <li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>

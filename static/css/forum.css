@@ -43,9 +43,19 @@
   display: none; /* FOR NOW */
 }
 
+.sidebar-header {
+  width: 100%;
+}
+
 .sidebar-header a {
   text-decoration: none;
   color: rgba(125, 136, 255, 0.85);
+  padding: 3px;
+}
+
+.sidebar-header hr {
+  border: none;
+  border-top: 1px solid rgba(125, 136, 255, 0.5);
 }
 
 /* Categories */
@@ -58,4 +68,14 @@ ul.categories-list {
 ul.categories-list li a {
   text-decoration: none;
   color: black;
+  width: 100%;
+  display: block;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+
+ul.categories-list li a:hover {
+  background: rgba(125, 136, 255, 0.85);
+  color: white;
 }
