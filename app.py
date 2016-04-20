@@ -129,11 +129,24 @@ def postquestion():
         if request.method == "GET":
             return render_template("postquestion.html", username=session['username'])
         else:
-            questionTitle = request.form['questionTitle'].encode('ascii', 'ignore')
-            questionText = request.form['questionText'].encode('ascii', 'ignore')
-            category = request.form['category']
-            dbutils.insertQuestion(questionTitle, calendar.timegm(time.gmtime()), questionText, category, session['username'])
-            return redirect(url_for("forum"))
+            if request.form['submit'] == 'Post':
+                questionTitle = request.form['questionTitle'].encode('ascii', 'ignore')
+                questionText = request.form['questionText'].encode('ascii', 'ignore')
+                category = request.form['category']
+                dbutils.insertQuestion(questionTitle, calendar.timegm(time.gmtime()), questionText, category, session['username'])
+                return redirect(url_for("forum"))
+            elif request.form['submit'] == 'Find Answer':
+                searchString = request.form['questionTitle'].encode('ascii', 'ignore').strip()
+                searchTokens = searchString.split(' ')
+                
+                sort = dbutils.searchQuestions(searchTokens)
+                
+                results = []
+                numResults = min(5, len(sort))
+                for i in range(numResults):
+                    results.append(sort[i])
+                
+                return render_template("postquestion.html", results=results)
 
 @app.route("/deletequestion/<qid>")
 def deletequestion(qid = None):
@@ -188,8 +201,7 @@ def question(qid = None):
             return redirect(url_for("question", qid=qid))
 
             
-def getKey(item):
-    return item[0]
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method == "GET":
@@ -201,8 +213,7 @@ def search():
         searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
         searchTokens = searchString.split(' ')
         
-        initResults = dbutils.searchQuestions(searchTokens)
-        sort = sorted(initResults, key=getKey, reverse=True)
+        sort = dbutils.searchQuestions(searchTokens)
         
         searchResults = []
         for entry in sort:
