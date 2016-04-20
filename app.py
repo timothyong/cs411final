@@ -193,7 +193,10 @@ def getKey(item):
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method == "GET":
-        return render_template("search.html")
+        if 'username' in session:
+            return render_template("search.html", username=session['username'])
+        else:
+            return render_template("search.html")   
     else:
         searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
         searchTokens = searchString.split(' ')
@@ -204,12 +207,10 @@ def search():
         searchResults = []
         for entry in sort:
             searchResults.append(entry)
-        
-        return render_template("search.html", results=searchResults)
-        
-            
-            
-        
+        if 'username' in session:
+            return render_template("search.html", results=searchResults, username=session['username'])
+        else:
+            return render_template("search.html", results=searchResults)
 
 @app.route("/vote/<aid>/<updown>")
 def vote(aid = None, updown = None):
