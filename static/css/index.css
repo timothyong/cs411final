@@ -20,6 +20,8 @@ body {
   width: 100%;
   padding: 0px;
   border-bottom: 1px solid rgba(125, 136, 255, 0.5);
+
+  box-shadow: 0 4px 8px -2px rgba(125, 136, 255, 0.25);
 }
 
 .navbar-left {
@@ -345,6 +347,8 @@ body {
   background: none;
 }
 
+
+/* OTHER PEOPLES SHIT */
 .settings-info {
   font-size: 30px;
   font-family: 'Varela Round', sans-serif;
@@ -379,13 +383,7 @@ body {
   width: 300px;
   text-decoration: none;
 }
-li:nth-child(even) {
-  background: rgba(0,50,255,0.5);
-  text-decoration: none;
-}
-li:nth-child(odd) {
-  background: rgba(255,150,10,0.5);
-}
+
 
 #question-score-div {
   color: DarkGreen;

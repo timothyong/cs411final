@@ -2,45 +2,65 @@
   <title>A place for discovery | Clarity</title>
 
   <link rel="shortcut icon" type="image/ico" href="../static/img/favicon.ico">
+  <link rel="stylesheet" href="../static/css/forum.css">
 </head>
 
 {% include 'header.html' %}
 
 <body>
-  {% if username %}
-  <a href="{{ url_for('postquestion') }}">Ask a Question</a>
-  {% endif %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <br>
-  <h1>Sort by category</h1>
-  <ul class="question-list">
-    <li><a href='{{ url_for('forum') }}'>All Questions</a></li>
-    <li><a href='{{ url_for('forum', category="#YOLO") }}'>#YOLO</a></li>
-    <li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>
-    <li><a href='{{ url_for('forum', category="#WUT") }}'>#WUT</a></li>
-    <li><a href='{{ url_for('forum', category="#Food") }}'>#Food</a></li>
-    <li><a href='{{ url_for('forum', category="#Cars") }}'>#Cars</a></li>
-    <li><a href='{{ url_for('forum', category="#Funny") }}'>#Funny</a></li>
-    <li><a href='{{ url_for('forum', category="#Movies") }}'>#Movies</a></li>
-    <li><a href='{{ url_for('forum', category="#Programming") }}'>#Programming</a></li>
-    <li><a href='{{ url_for('forum', category="#Gaming") }}'>#Gaming</a></li>
-   </ul>
-  {% if category %}
-  <h1>{{ category }} Questions</h1>
-  {% else %}
-  <h1>All Questions</h1>
-  {% endif %}
-  <ul class="question-list">
-    {% for x in questions %}
-    <li>
-      <a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a>&nbsp;&nbsp;&nbsp;
+  <!-- Main container -->
+  <div class="main-container-flexbox">
+    <div class="sidebar-wrapper">
+      <div class="sidebar-left">
+        <!-- This will go to Categories page maybe -->
+        <span class="sidebar-header"><a href="#">Categories</a></span>
+        <ul class="categories-list">
+          <li><a href='{{ url_for('forum', category="#YOLO") }}'>#YOLO</a></li>
+          <li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>
+          <li><a href='{{ url_for('forum', category="#WUT") }}'>#WUT</a></li>
+          <li><a href='{{ url_for('forum', category="#Food") }}'>#Food</a></li>
+          <li><a href='{{ url_for('forum', category="#Cars") }}'>#Cars</a></li>
+          <li><a href='{{ url_for('forum', category="#Funny") }}'>#Funny</a></li>
+          <li><a href='{{ url_for('forum', category="#Movies") }}'>#Movies</a></li>
+          <li><a href='{{ url_for('forum', category="#Programming") }}'>#Programming</a></li>
+          <li><a href='{{ url_for('forum', category="#Gaming") }}'>#Gaming</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-container">
       {% if username %}
-      {% if username == x[5] or isAdmin%}
-      <a href='{{ url_for('deletequestion', qid=x[3]) }}'> Delete </a>
+      <a href="{{ url_for('postquestion') }}">Ask a Question</a>
       {% endif %}
+
+      {% if category %}
+      <h1>{{ category }} Questions</h1>
+      {% else %}
+      <h1>All Questions</h1>
       {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+      <ul class="question-list">
+        {% for x in questions %}
+        <li>
+          <a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a>&nbsp;&nbsp;&nbsp;
+          {% if username %}
+          {% if username == x[5] or isAdmin%}
+          <a href='{{ url_for('deletequestion', qid=x[3]) }}'> Delete </a>
+          {% endif %}
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="sidebar-wrapper">
+      <div class="sidebar-right">
+
+      </div>
+    </div>
+
+  </div>
+
+
+
 </body>
 
