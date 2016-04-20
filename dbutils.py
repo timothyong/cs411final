@@ -124,7 +124,10 @@ def changePassword(username, password, newpassword):
                   {"newpassword":newpassword, "username":username})
         conn.commit()
         return "Password successfully changed"
-
+        
+def getKey(item):
+    return item[0]
+    
 def searchQuestions(searchTokens):
     
     c.execute('SELECT * FROM questions')
@@ -155,7 +158,8 @@ def searchQuestions(searchTokens):
         if matchStrength != 0:
             results.append((matchStrength * (upvoteSum+1), entry[0], entry[3]))
             
-    return results
+        sort = sorted(results, key=getKey, reverse=True)
+    return sort
         
 '''
 def isUserAdmin(username):

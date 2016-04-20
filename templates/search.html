@@ -4,25 +4,26 @@
 		<input type="text" name="searchfield" placeholder="Find an answer!">
 		<button type="submit" value="submit" name="button">Go</button>
 	</form>
-	search page
 </body>
 
 <br>
 <br>
 <br>
+
+{% if results %}
 Results:
 
 <ul class="question-list">
 
-    {% if results %}
     {% for x in results %}
     <li>
         <a href='{{ url_for('question', qid=x[2]) }}'>{{ x[1] }}</a>&nbsp;&nbsp;&nbsp;
     </li>
     {% endfor %}
-    {% endif %}
 
 </ul>
+
+{% endif %}
 
 
 

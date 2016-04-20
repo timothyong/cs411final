@@ -1,19 +1,36 @@
 {% include 'header.html' %}
 
 <form method="POST">
-  Question Title:<br>
-  <input type="text" name="questionTitle"><br>
-  Category:<br>
-  <input type="radio" name="category" value="#YOLO" checked> #YOLO<br>
-  <input type="radio" name="category" value="#LMFAO"> #LMFAO<br>
-  <input type="radio" name="category" value="#WUT"> #WUT<br>
-  <input type="radio" name="category" value="#Food"> #Food<br>
-  <input type="radio" name="category" value="#Cars"> #Cars<br>
-  <input type="radio" name="category" value="#Funny"> #Funny<br>
-  <input type="radio" name="category" value="#Movies"> #Movies<br>
-  <input type="radio" name="category" value="#Programming"> #Programming<br>
-  <input type="radio" name="category" value="#Gaming"> #Gaming<br>
-  Question: <br>
-  <textarea name="questionText" rows="4" cols="50"></textarea>
-  <button type="submit" value="submit" name="button">Post</button>
+	Question Title:<br>
+	<input type="text" name="questionTitle">
+	<input type="submit" name="submit" value="Find Answer"><br>
+	Category:<br>
+	<input type="radio" name="category" value="#YOLO" checked> #YOLO<br>
+	<input type="radio" name="category" value="#LMFAO"> #LMFAO<br>
+	<input type="radio" name="category" value="#WUT"> #WUT<br>
+	<input type="radio" name="category" value="#Food"> #Food<br>
+	<input type="radio" name="category" value="#Cars"> #Cars<br>
+	<input type="radio" name="category" value="#Funny"> #Funny<br>
+	<input type="radio" name="category" value="#Movies"> #Movies<br>
+	<input type="radio" name="category" value="#Programming"> #Programming<br>
+	<input type="radio" name="category" value="#Gaming"> #Gaming<br>
+	<br>
+	Question: <br>
+	<textarea name="questionText" rows="4" cols="50"></textarea><br>
+	<input type="submit" name="submit" value="Post">
 </form>
+
+{% if results %}
+Do these answer your question?
+
+<ul class="question-list">
+
+    {% for x in results %}
+    <li>
+        <a href='{{ url_for('question', qid=x[2]) }}'>{{ x[1] }}</a>&nbsp;&nbsp;&nbsp;
+    </li>
+    {% endfor %}
+
+</ul>
+
+{% endif %}
