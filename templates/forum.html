@@ -36,23 +36,41 @@
       <a href="{{ url_for('postquestion') }}">Ask a Question</a>
       {% endif %}
 
-      {% if category %}
-      <h1>{{ category }} Questions</h1>
-      {% else %}
-      <h1>All Questions</h1>
-      {% endif %}
-      <ul class="question-list">
-        {% for x in questions %}
-        <li>
-          <a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a>&nbsp;&nbsp;&nbsp;
-          {% if username %}
-          {% if username == x[5] or isAdmin%}
-          <a href='{{ url_for('deletequestion', qid=x[3]) }}'> Delete </a>
+
+      <div class="mc-header-wrapper">
+        <div class="mc-header">
+          {% if category %}
+          <h1>{{ category }} Questions</h1>
+          {% else %}
+          <h1>All Questions</h1>
           {% endif %}
-          {% endif %}
-        </li>
-        {% endfor %}
-      </ul>
+
+          <a href="#"> Ask a Question</a>
+        </div>
+
+        <!-- This makes it so the mc-content doesn't go under the header -->
+        <div class="mc-header-spacing">
+          <h1> LUL </h1>
+        </div>
+
+        <hr>
+      </div>
+
+      <div class="mc-content">
+        <ul class="question-list">
+          {% for x in questions %}
+          <li>
+            <a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a>&nbsp;&nbsp;&nbsp;
+            {% if username %}
+            {% if username == x[5] or isAdmin%}
+            <a href='{{ url_for('deletequestion', qid=x[3]) }}'> Delete </a>
+            {% endif %}
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
     </div>
 
     <div class="sidebar-wrapper">
