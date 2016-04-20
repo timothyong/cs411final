@@ -17,7 +17,7 @@ def updateVoted(username, voted):
     return True
 
 def getQuestionById(qid):
-    c.execute('SELECT * FROM questions WHERE qid=?', qid)
+    c.execute('SELECT * FROM questions WHERE qid=:qid', {"qid":qid})
     return c.fetchone()
 
 def getQuestionsByCategory(category):
@@ -34,7 +34,7 @@ def getAllQuestions():
     return c.fetchall()
 
 def getAnswersByQuestion(qid):
-    c.execute('SELECT * FROM answers WHERE qid=? ORDER BY upvotes DESC', qid)
+    c.execute('SELECT * FROM answers WHERE qid=:qid ORDER BY upvotes DESC', {"qid":qid})
     return c.fetchall()
 
 def getAnswerById(aid):
