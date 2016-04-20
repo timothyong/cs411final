@@ -157,8 +157,8 @@ def searchQuestions(searchTokens):
             
         if matchStrength != 0:
             results.append((matchStrength * (upvoteSum+1), entry[0], entry[3]))
-        sort = []
-        sort = sorted(results, key=getKey, reverse=True)
+    sort = []
+    sort = sorted(results, key=getKey, reverse=True)
     return sort
         
 '''
