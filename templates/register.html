@@ -26,17 +26,23 @@
     </div>
   </div>
 
+
+
   <div class="modal-container">
     <div class="modal">
       <span class="logo">
         <a href="{{ url_for('forum') }}">clarity</a>
       </span>
 
-      <div class="links-container" id="register-form">
+      <div class="links-container" id="register-form" style="position: relative;">
+        <!-- Tooltips for input forms -->
+        <div class="fullname-tooltip">Sorry about that, but we need at least 3 characters for your name</div>
+        <div class="username-tooltip">We're gonna need at least 4 characters for your username</div>
+        <div class="password-tooltip">Minimum of 6 characters for your password, please!</div>
+        <div class="passwordConf-tooltip">I don't think the two passwords match :/</div>
+
         <form method="POST">
-          <input type="text" name="name" placeholder="Full Name">
-          <!-- <input type="radio" name="gender" value="M" checked> Male
-          <input type="radio" name="gender" value="F"> Female -->
+          <input id="fullname" type="text" name="name" placeholder="Full Name">
           <input type="text" name="username" placeholder="Username">
           <input type="password" name="password" placeholder="Password">
           <input type="password" name="passwordconf" placeholder="Confirm password">

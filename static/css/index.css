@@ -254,7 +254,48 @@ body {
   color: rgba(125, 136, 255, 0.5);
 }
 
+/* Input form tooltips */
+.fullname-tooltip,
+.username-tooltip,
+.password-tooltip,
+.passwordConf-tooltip {
+  color: white;
+  /*display: none;*/
+  opacity: 0;
+  position: absolute;
+  background: rgb(255, 112, 112);
+  z-index: 10;
+  padding: 10px;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 3px;
+  border: 1px solid rgb(255, 112, 112);
+  min-width: 160px;
+  text-align: center;
 
+  -webkit-transition: opacity 0.25s ease-in-out;
+}
+
+.tooltip-active {
+  opacity: 1;
+}
+
+.fullname-tooltip:before,
+.username-tooltip:before,
+.password-tooltip:before,
+.passwordConf-tooltip:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-right: 9px solid rgb(255, 112, 112);
+
+  left: -9px;
+  top: 12px;
+}
 
 #change-password-form button,
 #login-form button,
