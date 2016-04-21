@@ -5,6 +5,13 @@
        url(../fonts/VarelaRound-Regular.woff2) format('woff2');
 }
 
+@font-face {
+  font-family: 'Lato Light';
+  src: url(../fonts/Lato-Light.ttf)   format('truetype'),
+       url(../fonts/Lato-Light.woff)  format('woff'),
+       url(../fonts/Lato-Light.woff2) format('woff2');
+}
+
 .main-container-flexbox {
   display: flex;
   justify-content: center;
