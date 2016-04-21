@@ -162,13 +162,8 @@ def postquestion():
                 numResults = min(5, len(sort))
                 for i in range(numResults):
                     results.append(sort[i])
-<<<<<<< HEAD
-
-                return render_template("postquestion.html", results=results)
-=======
 
                 return render_template("postquestion.html", results=results, username=session['username'])
->>>>>>> 3d497f1d678c8f392bbcf2ec4ddb29ad39b31a2c
 
 @app.route("/deletequestion/<qid>")
 def deletequestion(qid = None):
