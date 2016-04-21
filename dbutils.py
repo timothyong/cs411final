@@ -16,6 +16,10 @@ def updateVoted(username, voted):
     conn.commit()
     return True
 
+def getCategories():
+    c.execute('SELECT DISTINCT category FROM questions')
+    return c.fetchall()
+
 def getQuestionById(qid):
     c.execute('SELECT * FROM questions WHERE qid=:qid', {"qid":qid})
     return c.fetchone()

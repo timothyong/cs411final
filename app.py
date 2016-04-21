@@ -8,18 +8,19 @@ app.secret_key = "el em eff ay oh"
 @app.route("/")
 @app.route("/<category>")
 def forum(category = None):
+    allCategories = dbutils.getCategories()
     if category is None:
         allQuestions = dbutils.getAllQuestions()
         if 'username' in session:
-            return render_template("forum.html", username=session['username'], questions=allQuestions)
+            return render_template("forum.html", username=session['username'], questions=allQuestions, categories=allCategories)
         else:
-            return render_template("forum.html", questions=allQuestions)
+            return render_template("forum.html", questions=allQuestions,categories=allCategories)
     else:
         questions = dbutils.getQuestionsByCategory(category)
         if 'username' in session:
-            return render_template("forum.html", username=session['username'], questions=questions, category=category)
+            return render_template("forum.html", username=session['username'], questions=questions, category=category,categories=allCategories )
         else:
-            return render_template("forum.html", questions=questions, category=category)
+            return render_template("forum.html", questions=questions, category=category,categories=allCategories)
 
 @app.route("/login", methods=["GET", "POST"])
 def login(redirectTo = None):
@@ -133,6 +134,8 @@ def postquestion():
                 questionTitle = request.form['questionTitle'].encode('ascii', 'ignore')
                 questionText = request.form['questionText'].encode('ascii', 'ignore')
                 category = request.form['category']
+                if category == 'other':
+                    category = request.form['other']
                 dbutils.insertQuestion(questionTitle, calendar.timegm(time.gmtime()), questionText, category, session['username'])
                 return redirect(url_for("forum"))
             elif request.form['submit'] == 'Find Answer':
