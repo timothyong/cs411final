@@ -163,7 +163,7 @@ def postquestion():
                 for i in range(numResults):
                     results.append(sort[i])
                 
-                return render_template("postquestion.html", results=results)
+                return render_template("postquestion.html", results=results, username=session['username'])
 
 @app.route("/deletequestion/<qid>")
 def deletequestion(qid = None):
