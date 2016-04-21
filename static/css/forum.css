@@ -129,7 +129,7 @@ ul.categories-list li a:hover {
   padding-top: 2px;
 }
 
-.mc-header-buttons a {
+.mc-header a {
   margin-left: auto;
   text-decoration: none;
   padding: 6px 5px 4px 8px;
@@ -139,17 +139,21 @@ ul.categories-list li a:hover {
   display: inline;
 }
 
-.mc-header-buttons a.ask-question {
+.mc-header a.ask-question {
   padding-right: 8px;
 }
 
-.mc-header-buttons a:hover {
+.mc-header a:hover {
   background: rgba(125, 136, 255, 0.85);
   color: white;
 }
 
-.mc-header-buttons a.ask-question i {
+.mc-header a.ask-question i {
   padding-top: 3px;
+}
+
+.mc-header #return {
+  padding: 6px 8px;
 }
 
 .mc-header-spacing {
