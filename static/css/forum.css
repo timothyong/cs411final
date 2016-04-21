@@ -129,24 +129,27 @@ ul.categories-list li a:hover {
   padding-top: 2px;
 }
 
-.mc-header a {
+.mc-header-buttons a {
   margin-left: auto;
   text-decoration: none;
-  padding: 5px 9px;
+  padding: 6px 5px 4px 8px;
   border-radius: 3px;
   color: rgb(125, 136, 180);
 
-  display: flex;
-  align-items: center;
+  display: inline;
 }
 
-.mc-header a:hover {
+.mc-header-buttons a.ask-question {
+  padding-right: 8px;
+}
+
+.mc-header-buttons a:hover {
   background: rgba(125, 136, 255, 0.85);
   color: white;
 }
 
-.mc-header a.ask-question i {
-  padding-right: 3px;
+.mc-header-buttons a.ask-question i {
+  padding-top: 3px;
 }
 
 .mc-header-spacing {

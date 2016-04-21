@@ -50,15 +50,23 @@
           <h1>All Questions</h1>
           {% endif %}
 
-          <a class="ask-question"
-             href="{% if username %}
-                    {{ url_for('postquestion') }}
-                   {% else %}
-                    {{ url_for('login') }}
-                   {% endif %}">
-            <i class="fa fa-pencil-square-o"></i>
-            Ask a Question
-          </a>
+          <div class="mc-header-buttons" style="margin-left: auto;">
+            <a class="search-question" href="{{ url_for('search') }}">
+              <i class="fa fa-search"></i>
+              Find
+            </a>
+
+            <a class="ask-question"
+               href="{% if username %}
+                      {{ url_for('postquestion') }}
+                     {% else %}
+                      {{ url_for('login') }}
+                     {% endif %}">
+              <i class="fa fa-pencil-square-o"></i>
+              Ask
+            </a>
+          </div>
+
         </div>
 
         <!-- This makes it so the mc-content doesn't go under the header -->
