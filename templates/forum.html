@@ -20,22 +20,10 @@
           <hr>
         </div>
         <ul class="categories-list">
-<<<<<<< HEAD
-          <li><a href='{{ url_for('forum', category="YOLO") }}'>#YOLO</a></li>
-          <li><a href='{{ url_for('forum', category="LMFAO") }}'>#LMFAO</a></li>
-          <li><a href='{{ url_for('forum', category="WUT") }}'>#WUT</a></li>
-          <li><a href='{{ url_for('forum', category="Food") }}'>#Food</a></li>
-          <li><a href='{{ url_for('forum', category="Cars") }}'>#Cars</a></li>
-          <li><a href='{{ url_for('forum', category="Funny") }}'>#Funny</a></li>
-          <li><a href='{{ url_for('forum', category="Movies") }}'>#Movies</a></li>
-          <li><a href='{{ url_for('forum', category="Programming") }}'>#Programming</a></li>
-          <li><a href='{{ url_for('forum', category="Gaming") }}'>#Gaming</a></li>
-        </ul>
-=======
-	  {% for x in categories %}
+	        {% for x in categories %}
           <li><a href='{{ url_for('forum', category=x[0]) }}'>{{ x[0] }}</a></li>
           {% endfor %}
-	</ul>
+	       </ul>
 	<!--li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>
           <li><a href='{{ url_for('forum', category="#WUT") }}'>#WUT</a></li>
           <li><a href='{{ url_for('forum', category="#Food") }}'>#Food</a></li>
@@ -45,7 +33,6 @@
           <li><a href='{{ url_for('forum', category="#Programming") }}'>#Programming</a></li>
           <li><a href='{{ url_for('forum', category="#Gaming") }}'>#Gaming</a></li>
         </ul-->
->>>>>>> 743b59f30ad08187836543526c56e06019e62677
       </div>
     </div>
 
