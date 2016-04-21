@@ -137,11 +137,12 @@ def postquestion():
                 if category == 'other':
                     category = request.form['other']
                 minReq = 0
-                try:
-                    minReq = int(request.form['min'])
-                except:
-                    return redirect(url_for("error"))
-                
+                if request.form['min'] != "":
+                    try:
+                        minReq = int(request.form['min'])
+                    except:
+                        return redirect(url_for("error"))
+                                
                 cred = dbutils.getUserCredits(session['username'])
                 if (cred < 1):
                     minReq = 0
