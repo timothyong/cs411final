@@ -136,7 +136,21 @@ def postquestion():
                 category = request.form['category']
                 if category == 'other':
                     category = request.form['other']
-                dbutils.insertQuestion(questionTitle, calendar.timegm(time.gmtime()), questionText, category, session['username'])
+                minReq = 0
+                if request.form['min'] != "":
+                    try:
+                        minReq = int(request.form['min'])
+                    except:
+                        return redirect(url_for("error"))
+
+                cred = dbutils.getUserCredits(session['username'])
+                if (cred < 1):
+                    minReq = 0
+                else:
+                    cred -= 1
+                dbutils.updateCredit(session['username'], cred)
+                dbutils.insertQuestion(questionTitle, calendar.timegm(time.gmtime()), questionText,
+                                       category, session['username'], minReq)
                 return redirect(url_for("forum"))
             elif request.form['submit'] == 'Find Answer':
                 searchString = request.form['questionTitle'].encode('ascii', 'ignore').strip()
@@ -148,8 +162,13 @@ def postquestion():
                 numResults = min(5, len(sort))
                 for i in range(numResults):
                     results.append(sort[i])
+<<<<<<< HEAD
 
                 return render_template("postquestion.html", results=results)
+=======
+
+                return render_template("postquestion.html", results=results, username=session['username'])
+>>>>>>> 3d497f1d678c8f392bbcf2ec4ddb29ad39b31a2c
 
 @app.route("/deletequestion/<qid>")
 def deletequestion(qid = None):
@@ -196,15 +215,21 @@ def question(qid = None):
                 newArr[1] = time.ctime(newArr[1])
                 answersArr.append(newArr)
             if 'username' in session:
-                return render_template("question.html", username=session['username'], question=questionArr, answers=answersArr)
+                minReq = question[6]
+                rank = dbutils.getUserRank(session['username'])
+                if rank >= minReq:
+                    return render_template("question.html", username=session['username'],
+                                           question=questionArr, answers=answersArr)
+                else:
+                    return render_template("question.html", username=session['username'],
+                                           question=questionArr, answers=answersArr,
+                                           error="You do not meet the minimum reputation that this user requested to answer this question")
             else:
                 return render_template("question.html", question=questionArr, answers=answersArr)
         else:
             answerText = request.form['answer'].encode('ascii', 'ignore')
             dbutils.insertAnswer(calendar.timegm(time.gmtime()), answerText, qid, session['username'])
             return redirect(url_for("question", qid=qid))
-
-
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
@@ -239,9 +264,11 @@ def vote(aid = None, updown = None):
         userUp = answer[5]
         rank = dbutils.getUserRank(userUp)
         upvotes = answer[0]
+        cred = dbutils.getUserCredits(userUp)
         if updown == "up":
             upvotes += 1
-            rank += 2
+            rank += 1
+            cred += .2
         else:
             upvotes -= 1
             rank -= 1
@@ -250,6 +277,7 @@ def vote(aid = None, updown = None):
         else:
             dbutils.updateAnswer(answer[2], upvotes)
             dbutils.updateUserRank(userUp, rank)
+            dbutils.updateCredit(userUp, cred)
             voted.append(aid)
             putback = " ".join(voted)
             dbutils.updateVoted(user, putback)

@@ -66,12 +66,16 @@
 
 
 	{% if username %}
+	{% if error %}
+	{{ error }}
+	{% else %}
 	<div class="links-container" id="post-button">
 		<form method="POST">
 			<textarea name="answer" rows="4" style="width: 360px; max-width: 360px;"></textarea><br>
 			<button type="submit" value="submit" name="button" style="width: 360px;">Post</button>
 		</form>
 	</div>
+	{% endif %}
 	{% endif %}
 
 </div>
