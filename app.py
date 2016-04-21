@@ -5,9 +5,9 @@ import time, calendar
 app = Flask(__name__)
 app.secret_key = "el em eff ay oh"
 
-@app.route("/")
-@app.route("/<category>")
-def forum(category = None, methods=["GET", "POST"]):
+@app.route("/",methods=["GET", "POST"])
+@app.route("/<category>", methods=["GET", "POST"])
+def forum(category = None):
     if request.method == "GET":
         allCategories = dbutils.getCategories()
         if category is None:
