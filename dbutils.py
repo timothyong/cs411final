@@ -141,7 +141,7 @@ def changePassword(username, password, newpassword):
 def getKey(item):
     return item[0]
     
-def searchQuestions(searchTokens, categories):
+def searchQuestions(searchTokens):
     
     c.execute('SELECT * FROM questions')
     questionList = c.fetchall();

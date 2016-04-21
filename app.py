@@ -156,9 +156,7 @@ def postquestion():
                 searchString = request.form['questionTitle'].encode('ascii', 'ignore').strip()
                 searchTokens = searchString.split(' ')
                 
-                categories = []
-                
-                sort = dbutils.searchQuestions(searchTokens, categories)
+                sort = dbutils.searchQuestions(searchTokens)
                 
                 results = []
                 numResults = min(5, len(sort))
@@ -238,9 +236,7 @@ def search():
         searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
         searchTokens = searchString.split(' ')
         
-        categories = []
-        
-        sort = dbutils.searchQuestions(searchTokens, categories)
+        sort = dbutils.searchQuestions(searchTokens)
         
         searchResults = []
         for entry in sort:
