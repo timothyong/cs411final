@@ -50,10 +50,10 @@ def getAnswersByUser(username, order):
               {"username":username, "order":order})
     return c.fetchall()
 
-def insertQuestion(title, qdate, qtext, category, username):
-    c.execute('''INSERT INTO questions (title, qdate, qtext, category, username)
-                 VALUES (:title, :qdate, :qtext, :category, :username)''',
-              {"title":title, "qdate":qdate, "qtext":qtext, "category":category, "username":username})
+def insertQuestion(title, qdate, qtext, category, username, minReq):
+    c.execute('''INSERT INTO questions (title, qdate, qtext, category, username, minReq)
+                 VALUES (:title, :qdate, :qtext, :category, :username, :minReq)''',
+              {"title":title, "qdate":qdate, "qtext":qtext, "category":category, "username":username, "minReq":minReq})
     conn.commit()
     return True
 
@@ -89,9 +89,18 @@ def updateUserRank(user, rank):
     conn.commit()
     return True
 
+def getUserCredits(user):
+    c.execute('SELECT credits FROM users WHERE username=:username', {"username":user})
+    return c.fetchone()[0]
+
+def updateCredit(user, credit):
+    c.execute('UPDATE users SET credits=:credits WHERE username=:username', {"credits":credit, "username":user})
+    conn.commit()
+    return True
+
 def insertUser(gender, rank, username, password, name):
-    c.execute('''INSERT INTO users VALUES (:gender, :rank, :username, :password, :name, :voted)''',
-              {"gender":gender, "rank":rank, "username":username, "password":password, "name":name, "voted":""})
+    c.execute('''INSERT INTO users VALUES (:gender, :rank, :username, :password, :name, :voted, :credits)''',
+              {"gender":gender, "rank":rank, "username":username, "password":password, "name":name, "voted":"", "credits":0})
     conn.commit()
     return True
 
