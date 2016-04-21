@@ -18,6 +18,7 @@
 	<br>
 	Question: <br>
 	<textarea name="questionText" rows="4" cols="50"></textarea><br>
+
 	<input type="submit" name="submit" value="Post">
 </form>
 
@@ -28,10 +29,12 @@ Do these answer your question?
 
     {% for x in results %}
     <li>
-        <a href='{{ url_for('question', qid=x[2]) }}'>{{ x[1] }}</a>&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('question', qid=x[2]) }}'>{{ x[1] }}</a>
     </li>
     {% endfor %}
 
 </ul>
 
 {% endif %}
+
+<script src="../static/js/PLACEHOLDER.js"></script>

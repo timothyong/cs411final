@@ -20,10 +20,10 @@
           <hr>
         </div>
         <ul class="categories-list">
-	        {% for x in categories %}
-          <li><a href='{{ url_for('forum', category=x[0]) }}'>{{ x[0] }}</a></li>
+          {% for x in categories %}
+          <li><a href="{{ url_for('forum', category=x[0]) }}">{{ x[0] }}</a></li>
           {% endfor %}
-	       </ul>
+        </ul>
 	<!--li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>
           <li><a href='{{ url_for('forum', category="#WUT") }}'>#WUT</a></li>
           <li><a href='{{ url_for('forum', category="#Food") }}'>#Food</a></li>
@@ -49,6 +49,7 @@
           {% else %}
           <h1>All Questions</h1>
           {% endif %}
+
           <a class="ask-question"
              href="{% if username %}
                     {{ url_for('postquestion') }}
@@ -71,13 +72,70 @@
       <div class="mc-content">
         <ul class="question-list">
           {% for x in questions %}
-          <li>
-            <a href='{{ url_for('question', qid=x[3]) }}'>{{ x[0] }}</a>&nbsp;&nbsp;&nbsp;
-            {% if username %}
-            {% if username == x[5] or isAdmin%}
-            <a href='{{ url_for('deletequestion', qid=x[3]) }}'> Delete </a>
-            {% endif %}
-            {% endif %}
+          <li class="question">
+            <div class="question-header">
+              Asked by
+              <a href="#">{{ x[5] }}</a>
+              in
+              <a href="{{ url_for('forum', category=x[4]) }}">{{ x[4] }}
+              </a>
+              <!-- <i class="fa fa-dot-circle-o"></i> -->
+              //
+              {{ x[1] }}
+
+
+              <div class="question-options">
+                <div tabindex="0" class="ellipsis">
+                  <a>
+                    <i class="fa fa-ellipsis-h">
+                    </i>
+                  </a>
+                </div>
+                <div class="question-dropdown">
+                  <ul class="dropdown-links">
+                    <li>
+                      <a href="#">
+                        Report
+                      </a>
+                    </li>
+                    {% if username and username == x[5] or isAdmin %}
+                    <li>
+                      <a href="{{ url_for('deletequestion', qid=x[3]) }}">
+                        Delete
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+
+
+                </div>
+              </div>
+
+            </div>
+            <div class="question-title">
+              <a href="{{ url_for('question', qid=x[3]) }}">{{ x[0] }}</a>
+            </div>
+
+            <div class="question-body" style="white-space: pre-line;">
+              {{ x[2] }}
+            </div>
+
+            <div class="question-footer">
+              <a href="{{ url_for('question', qid=x[3]) }}">
+                {% if username and username == x[5] %}
+                Post Reply
+                {% else %}
+                Write Answer
+                {% endif %}
+              </a>
+              <hr>
+            </div>
+
+            <script>
+              var q = document.querySelectorAll('.question-body');
+              for (var i = 0; i < q.length; i++)
+                q[i].innerHTML = q[i].innerHTML.trim()
+            </script>
           </li>
           {% endfor %}
         </ul>
@@ -93,7 +151,7 @@
 
   </div>
 
-
+  <script src="../static/js/forum.js"></script>
 
 </body>
 

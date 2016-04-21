@@ -7,6 +7,7 @@
 + Maybe touch up notifications with ERROR: header or something
 + Make shit unselectable
 + Strip names for characters
++ Increase padding for categories in sidebar
 
 
 ### Completed

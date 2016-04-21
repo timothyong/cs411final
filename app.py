@@ -141,14 +141,14 @@ def postquestion():
             elif request.form['submit'] == 'Find Answer':
                 searchString = request.form['questionTitle'].encode('ascii', 'ignore').strip()
                 searchTokens = searchString.split(' ')
-                
+
                 sort = dbutils.searchQuestions(searchTokens)
-                
+
                 results = []
                 numResults = min(5, len(sort))
                 for i in range(numResults):
                     results.append(sort[i])
-                
+
                 return render_template("postquestion.html", results=results)
 
 @app.route("/deletequestion/<qid>")
@@ -186,6 +186,7 @@ def question(qid = None):
             for x in question:
                 questionArr.append(x)
             questionArr[1] = time.ctime(questionArr[1])
+
             answers = dbutils.getAnswersByQuestion(str(qid))
             answersArr = []
             for x in answers:
@@ -203,7 +204,7 @@ def question(qid = None):
             dbutils.insertAnswer(calendar.timegm(time.gmtime()), answerText, qid, session['username'])
             return redirect(url_for("question", qid=qid))
 
-            
+
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
@@ -211,13 +212,13 @@ def search():
         if 'username' in session:
             return render_template("search.html", username=session['username'])
         else:
-            return render_template("search.html")   
+            return render_template("search.html")
     else:
         searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
         searchTokens = searchString.split(' ')
-        
+
         sort = dbutils.searchQuestions(searchTokens)
-        
+
         searchResults = []
         for entry in sort:
             searchResults.append(entry)

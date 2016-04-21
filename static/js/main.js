@@ -127,3 +127,4 @@ passwordConf.onfocus = function() {
     passwordConf.style.border = '1px solid rgb(225, 112, 112)';
   }
 }
+
