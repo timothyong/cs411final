@@ -7,20 +7,34 @@ app.secret_key = "el em eff ay oh"
 
 @app.route("/")
 @app.route("/<category>")
-def forum(category = None):
-    allCategories = dbutils.getCategories()
-    if category is None:
-        allQuestions = dbutils.getAllQuestions()
-        if 'username' in session:
-            return render_template("forum.html", username=session['username'], questions=allQuestions, categories=allCategories)
+def forum(category = None, methods=["GET", "POST"]):
+    if request.method == "GET":
+        allCategories = dbutils.getCategories()
+        if category is None:
+            allQuestions = dbutils.getAllQuestions()
+            if 'username' in session:
+                return render_template("forum.html", username=session['username'], questions=allQuestions, categories=allCategories)
+            else:
+                return render_template("forum.html", questions=allQuestions,categories=allCategories)
         else:
-            return render_template("forum.html", questions=allQuestions,categories=allCategories)
+            questions = dbutils.getQuestionsByCategory(category)
+            if 'username' in session:
+                return render_template("forum.html", username=session['username'], questions=questions, category=category,categories=allCategories )
+            else:
+                return render_template("forum.html", questions=questions, category=category,categories=allCategories)
     else:
-        questions = dbutils.getQuestionsByCategory(category)
+        searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
+        searchTokens = searchString.split(' ')
+
+        sort = dbutils.searchQuestions(searchTokens)
+
+        searchResults = []
+        for entry in sort:
+            searchResults.append(entry)
         if 'username' in session:
-            return render_template("forum.html", username=session['username'], questions=questions, category=category,categories=allCategories )
+            return render_template("search.html", results=searchResults, username=session['username'])
         else:
-            return render_template("forum.html", questions=questions, category=category,categories=allCategories)
+            return render_template("search.html", results=searchResults)
 
 @app.route("/login", methods=["GET", "POST"])
 def login(redirectTo = None):
