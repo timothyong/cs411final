@@ -213,7 +213,7 @@ def question(qid = None):
             if 'username' in session:
                 minReq = question[6]
                 rank = dbutils.getUserRank(session['username'])
-                if rank > minReq:
+                if rank >= minReq:
                     return render_template("question.html", username=session['username'], 
                                            question=questionArr, answers=answersArr)
                 else:
