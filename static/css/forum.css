@@ -189,7 +189,7 @@ ul.question-list li.question {
   border: 0;
   color: rgba(125, 136, 180, 1);
 
-/*  background: yellow;*/
+  background: white;
 }
 
 ul.question-list li a {
