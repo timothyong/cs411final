@@ -3,6 +3,8 @@
 
   <link rel="shortcut icon" type="image/ico" href="../static/img/favicon.ico">
   <link rel="stylesheet" href="../static/css/forum.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
 </head>
 
 {% include 'header.html' %}
@@ -18,34 +20,41 @@
           <hr>
         </div>
         <ul class="categories-list">
-          <li><a href='{{ url_for('forum', category="#YOLO") }}'>#YOLO</a></li>
-          <li><a href='{{ url_for('forum', category="#LMFAO") }}'>#LMFAO</a></li>
-          <li><a href='{{ url_for('forum', category="#WUT") }}'>#WUT</a></li>
-          <li><a href='{{ url_for('forum', category="#Food") }}'>#Food</a></li>
-          <li><a href='{{ url_for('forum', category="#Cars") }}'>#Cars</a></li>
-          <li><a href='{{ url_for('forum', category="#Funny") }}'>#Funny</a></li>
-          <li><a href='{{ url_for('forum', category="#Movies") }}'>#Movies</a></li>
-          <li><a href='{{ url_for('forum', category="#Programming") }}'>#Programming</a></li>
-          <li><a href='{{ url_for('forum', category="#Gaming") }}'>#Gaming</a></li>
+          <li><a href='{{ url_for('forum', category="YOLO") }}'>#YOLO</a></li>
+          <li><a href='{{ url_for('forum', category="LMFAO") }}'>#LMFAO</a></li>
+          <li><a href='{{ url_for('forum', category="WUT") }}'>#WUT</a></li>
+          <li><a href='{{ url_for('forum', category="Food") }}'>#Food</a></li>
+          <li><a href='{{ url_for('forum', category="Cars") }}'>#Cars</a></li>
+          <li><a href='{{ url_for('forum', category="Funny") }}'>#Funny</a></li>
+          <li><a href='{{ url_for('forum', category="Movies") }}'>#Movies</a></li>
+          <li><a href='{{ url_for('forum', category="Programming") }}'>#Programming</a></li>
+          <li><a href='{{ url_for('forum', category="Gaming") }}'>#Gaming</a></li>
         </ul>
       </div>
     </div>
 
     <div class="main-container">
-      {% if username %}
-      <a href="{{ url_for('postquestion') }}">Ask a Question</a>
-      {% endif %}
-
-
       <div class="mc-header-wrapper">
         <div class="mc-header">
           {% if category %}
-          <h1>{{ category }} Questions</h1>
+          <h1>
+            #{{ category }}
+          </h1>
+          <a id="return" href="{{ url_for('forum') }}" style="margin: 0 0 0 5px;">
+            <i class="fa fa-times" style="padding-bottom: 1px;"></i>
+          </a>
           {% else %}
           <h1>All Questions</h1>
           {% endif %}
-
-          <a href="#"> Ask a Question</a>
+          <a class="ask-question"
+             href="{% if username %}
+                    {{ url_for('postquestion') }}
+                   {% else %}
+                    {{ url_for('login') }}
+                   {% endif %}">
+            <i class="fa fa-pencil-square-o"></i>
+            Ask a Question
+          </a>
         </div>
 
         <!-- This makes it so the mc-content doesn't go under the header -->
@@ -53,7 +62,7 @@
           <h1> LUL </h1>
         </div>
 
-        <hr>
+
       </div>
 
       <div class="mc-content">
