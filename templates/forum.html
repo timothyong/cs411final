@@ -52,7 +52,7 @@
                href="{% if username %}
                       {{ url_for('postquestion') }}
                      {% else %}
-                      {{ url_for('login') }}
+                      {{ url_for('login', redirectTo='postquestion') }}
                      {% endif %}">
               <i class="fa fa-pencil-square-o"></i>
               Ask
