@@ -274,6 +274,9 @@ def vote(aid = None, updown = None):
         user = session['username']
         answer = dbutils.getAnswerById(aid)
         voted = dbutils.getVotes(user)[0].split()
+        for x in range(len(voted)):
+            voted[x] = int(voted[x])
+        aid = int(aid)
         question = answer[4]
         userUp = answer[5]
         rank = dbutils.getUserRank(userUp)
@@ -286,15 +289,43 @@ def vote(aid = None, updown = None):
         elif updown == "down":
             upvotes -= 1
             rank -= 1
-        if aid in voted:
+        neg = int(aid) * -1
+        if aid in voted and updown == "down":
+            upvotes -= 1
+            rank -= 1
+            voted[voted.index(aid)] *= -1
+            for x in range(len(voted)):
+                voted[x] = str(voted[x])
+            dbutils.updateAnswer(answer[2], upvotes)
+            dbutils.updateUserRank(userUp, rank)
+            putback = " ".join(voted)
+            dbutils.updateVoted(user, putback)
             return redirect(url_for("question", qid=question))
-        else:
+        elif neg in voted and updown == "up":
+            upvotes += 1
+            rank += 1
+            voted[voted.index(neg)] *= -1
+            for x in range(len(voted)):
+                voted[x] = str(voted[x])
             dbutils.updateAnswer(answer[2], upvotes)
             dbutils.updateUserRank(userUp, rank)
             dbutils.updateCredit(userUp, cred)
-            voted.append(aid)
             putback = " ".join(voted)
             dbutils.updateVoted(user, putback)
+            return redirect(url_for("question", qid=question))
+        elif (aid not in voted) and (neg not in voted):
+            dbutils.updateAnswer(answer[2], upvotes)
+            dbutils.updateUserRank(userUp, rank)
+            dbutils.updateCredit(userUp, cred)
+            if updown == "down":
+                aid *= -1
+            voted.append(aid)
+            for x in range(len(voted)):
+                voted[x] = str(voted[x])
+            putback = " ".join(voted)
+            dbutils.updateVoted(user, putback)
+            return redirect(url_for("question", qid=question))
+        else:
             return redirect(url_for("question", qid=question))
 
 @app.route("/user/<username>")
