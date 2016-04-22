@@ -297,7 +297,7 @@ def user(username):
     if username == None:
         return redirect(url_for("error"))
     userinfo = dbutils.getUser(username)
-    recentAnswers = dbutils.getAnswerOBsByUser(username, "adate")[0:5]
+    recentAnswers = dbutils.getAnswersByUser(username, "adate")[0:5]
     topAnswers = dbutils.getAnswersByUser(username, "upvotes")[0:5]
     recentQuestions = dbutils.getQuestionsByUser(username, "qdate")[0:5]
     if 'username' in session:
