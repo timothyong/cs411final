@@ -1,38 +1,58 @@
+<head>
+  <link rel="shortcut icon" type="image/ico" href="../static/img/favicon.ico">
+  <link rel="stylesheet" href="../static/css/forum.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+</head>
+
 {% include 'header.html' %}
 
-<form method="POST">
-	Question Title:<br>
-	<input type="text" name="questionTitle">
-	<input type="submit" name="submit" value="Find Answer"><br>
-	Category:<br>
-	<input type="radio" name="category" value="Programming"> Programming<br>
-	<input type="radio" name="category" value="Math"> Math<br>
-	<input type="radio" name="category" value="Movies"> Movies<br>
-	<input type="radio" name="category" value="Gaming"> Gaming<br>
-	<input type="radio" name="category" value="Random"> Random<br>
-	<input type="radio" name="category" value="other"> Other: <input type="text" name="other"/><br>
-	<br>
-	Question: <br>
-	Minimum Reputation (if left blank, anyone can answer): <br>
-	<input type="text" name="min"/><br>
-	<textarea name="questionText" rows="4" cols="50"></textarea><br>
+<body>
+  <div class="main-container-flexbox">
+    <div class="main-container">
+      <form class="post-question" method="POST">
+        <div class="section-header">
+          New Question
+          <hr>
+        </div>
+        <div style="padding-bottom: 20px;">
+          <div class="section-header2">
+            <span class="maintext">Title - </span><span class="subtext"><em>Enter a title for your question</em></span>
+            <hr>
+          </div>
+          <input class="title" type="text" name="questionTitle" placeholder="Enter your title here...">
+          <button class="title-button" type="submit" name="submit" value="Find Answer">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <div class="section-header2">
+          <span class="maintext">Question Body - </span><span class="subtext"><em>Write additional info to help users better understand what you're asking.</em></span>
+          <hr>
+        </div>
+        <textarea class="question-body" name="questionText" rows="4" cols="50"></textarea>
+        <div class="section-header2">
+          <span class="maintext">Category - </span><span class="subtext"><em>Pick one of the default categories, or create your own!</em></span>
+          <hr>
+        </div>
+        <input type="radio" name="category" value="Programming"> <span class="mainradio">Programming - </span><span class="subradio">For questions related to all things programming</span><br>
+        <input type="radio" name="category" value="Math"> <span class="mainradio">Math - </span><span class="subradio">From calculus to discrete math, ask math-related questions here!</span><br>
+        <input type="radio" name="category" value="Movies"> <span class="mainradio">Movies - </span><span class="subradio">Look for new movie recommendations!</span><br>
+        <input type="radio" name="category" value="Gaming"> <span class="mainradio">Gaming - </span><span class="subradio">Learn about games you've never played!</span><br>
+        <input type="radio" name="category" value="Random"> <span class="mainradio">Random - </span><span class="subradio">Just random, off-topic questions here!</span><br>
+        <input type="radio" name="category" value="other"> <input class="other" type="text" name="other" placeholder="Create a custom category..."><br><br>
 
-	<input type="submit" name="submit" value="Post">
-</form>
+        <div class="section-header2">
+          <span class="maintext">Rep Requirement - </span><span class="subtext"><em>Require users to meet a certain Rep minimum in order to answer!</em></span>
+          <hr>
+        </div>
+        <input style="width: 25%;" type="text" name="min" placeholder="Enter a number..."> <span class="subradio">Or you can just leave it blank for no requirement!</span>
+        <br>
 
-{% if results %}
-Do these answer your question?
-
-<ul class="question-list">
-
-    {% for x in results %}
-    <li>
-        <a href='{{ url_for('question', qid=x[2]) }}'>{{ x[1] }}</a>
-    </li>
-    {% endfor %}
-
-</ul>
-
-{% endif %}
+        <button class="submit-question" type="submit" name="submit" value="Post">
+          Post Question
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
 
 <script src="../static/js/PLACEHOLDER.js"></script>

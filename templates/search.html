@@ -12,12 +12,15 @@
       <div class="mc-header-wrapper">
         <div class="mc-header">
           <form class="search-form" method="POST">
-            <input type="text" name="searchfield" placeholder="Search for something...">
+            <input type="text" name="searchfield"
+                   placeholder="Search for something..."
+                   {% if searchStringPQ %}
+                   value = "{{ searchStringPQ }}"
+                   {% endif %}>
             <button type="submit" value="submit" name="button">
               <i class="fa fa-search"></i>
             </button>
           </form>
-
 
         </div> <!-- mc-header -->
 

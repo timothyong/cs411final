@@ -169,16 +169,20 @@ def postquestion():
                 return redirect(url_for("forum"))
             elif request.form['submit'] == 'Find Answer':
                 searchString = request.form['questionTitle'].encode('ascii', 'ignore').strip()
-                searchTokens = searchString.split(' ')
+                # searchTokens = searchString.split(' ')
 
-                sort = dbutils.searchQuestions(searchTokens)
+                # sort = dbutils.searchQuestions(searchTokens)
 
-                results = []
-                numResults = min(5, len(sort))
-                for i in range(numResults):
-                    results.append(sort[i])
+                # results = []
+                # numResults = min(5, len(sort))
+                # for i in range(numResults):
+                #     results.append(sort[i])
 
-                return render_template("postquestion.html", results=results, username=session['username'])
+                # return render_template("postquestion.html", results=results, username=session['username'])
+                if 'username' in session:
+                    return render_template("search.html", username=session['username'], searchStringPQ=searchString)
+                else:
+                    return render_template("search.html", searchStringPQ=searchString)
 
 @app.route("/deletequestion/<qid>")
 def deletequestion(qid = None):

@@ -496,27 +496,32 @@ form.search-form input {
   color: rgba(125, 136, 255, 0.5);
 }
 
-form.search-form input:focus {
+form.search-form input:focus,
+form.post-question input:focus {
   border: 1px solid rgba(125, 136, 255, 1);
   outline: none;
   color: rgb(125, 136, 255);
 }
 
-form.search-form input::-webkit-input-placeholder {
+form.search-form input::-webkit-input-placeholder,
+form.post-question input::-webkit-input-placeholder {
   color: rgba(125, 136, 255, 0.5);
 }
 
 /* Firefox 18- */
-form.search-form input::-moz-placeholder {
+form.search-form input::-moz-placeholder,
+form.post-question input::-moz-placeholder {
   color: rgba(125, 136, 255, 0.5);
 }
 
 /* Firefox 19+ */
-form.search-form input::-moz-placeholder {
+form.search-form input:-moz-placeholder,
+form.post-question input:-moz-placeholder {
   color: rgba(125, 136, 255, 0.5);
 }
 
-form.search-form input:-ms-input-placeholder  {
+form.search-form input:-ms-input-placeholder,
+form.post-question input:-ms-input-placeholder {
   color: rgba(125, 136, 255, 0.5);
 }
 
@@ -577,4 +582,120 @@ span#rs {
 
 .question-result-title a {
   color: rgba(125, 136, 180, 1) !important;
+}
+
+/* POST QUESTION */
+form.post-question {
+  padding: 20px 20px 0 20px;
+}
+
+form.post-question div.section-header {
+  color: rgba(125, 136, 255, 0.85);
+  font-size: 1.7em;
+  font-family: 'Varela Round', sans-serif;
+}
+
+div.section-header2 span.maintext {
+  color: rgba(125, 136, 255, 0.85);
+  font-size: 1.1em;
+  font-family: 'Varela Round', sans-serif;
+}
+
+div.section-header2 span.subtext {
+  color: rgba(125, 136, 180, 0.65);
+  font-size: 0.85em !important;
+  font-family: 'Varela Round', sans-serif;
+}
+
+div.section-header hr,
+div.section-header2 hr {
+  margin-top: 1px;
+  border: 0;
+  border-top: 1px solid rgba(125, 136, 255, 0.2);
+}
+
+span.subtext {
+  font-size: 1em !important;
+}
+
+form.post-question input {
+  box-sizing: border-box;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 3px;
+  font-size: 1em;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  box-sizing:         border-box;
+
+  border: 1px solid rgba(125, 136, 255, 0.5);
+  margin-top: 5px;
+  padding: 10px;
+
+  color: rgba(125, 136, 255, 0.5);
+
+}
+
+form.post-question input.title {
+  width: 92%;
+}
+
+form.post-question button.title-button,
+form.post-question button.submit-question {
+  padding: 10px;
+  border-radius: 3px;
+  background: rgba(125, 136, 255, 0.75);
+  outline: none;
+  border: 1px solid rgba(125, 136, 255, 0.85);
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+form.post-question button.submit-question {
+  width: 100%;
+  margin-top: 10px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+form.post-question button:hover {
+  background: rgba(125, 136, 255, 0.65);
+}
+
+form.post-question button:active {
+  background: rgba(125, 136, 255, 0.85);
+}
+
+form.post-question button.title-button i {
+  margin: 0;
+  padding: 1px 3px 3px 3px;
+}
+
+form.post-question span.mainradio {
+  font-family: 'Varela Round', sans-serif;
+  color: rgba(125, 136, 255, 0.85);
+}
+
+form.post-question span.subradio {
+  font-family: 'Varela Round', sans-serif;
+  color: rgba(125, 136, 180, 0.75);
+}
+
+form.post-question input.other {
+  width: 45%;
+}
+
+form.post-question textarea.question-body {
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  border-radius: 3px;
+  outline: none;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid rgba(125, 136, 255, 0.5);
+}
+
+form.post-question textarea.question-body:focus {
+  border: 1px solid rgba(125, 136, 255, 0.85);
 }
