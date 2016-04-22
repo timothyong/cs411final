@@ -77,7 +77,7 @@
 					</div>
 
 					<div class="answers-count">
-						<span>{{ answers|length }} Answers</span>
+						<span>{{ answers|length }} {% if answers|length == 1 %}Answer{% else %}Answers{% endif %}</span>
 					</div>
           <hr style="margin: 0 !important;">
         </div>
