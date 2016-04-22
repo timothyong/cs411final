@@ -134,10 +134,20 @@
 		        </script>
 
 						<div class="comment-footer">
-              <a class="upvote-button style2" href="{{ url_for('vote', aid=x[2], updown='up') }}">
+              <a class="upvote-button style2"
+                {% if username %}
+                href="{{ url_for('vote', aid=x[2], updown='up') }}">
+                {% else %}
+                href="{{ url_for('login') }}">
+                {% endif %}
 								Upvote | {{ x[0] }}
               </a>
-              <a class="downvote-button style2" href="{{ url_for('vote', aid=x[2], updown='down') }}">
+              <a class="downvote-button style2"
+                {% if username %}
+                href="{{ url_for('vote', aid=x[2], updown='down') }}">
+                {% else %}
+                href="{{ url_for('login') }}">
+                {% endif %}
 								Downvote
               </a>
               <hr>
