@@ -9,7 +9,7 @@
   <div class="navbar-left">
     <div class="navbar-logo">
       <div class="logo">
-        <a href="{{ url_for('forum') }}">SEXYLOGO</a>
+        <a href="{{ url_for('forum') }}">clarity</a>
       </div>
     </div> <!-- navbar-logo -->
   </div> <!-- navbar-left -->
@@ -18,12 +18,11 @@
     <div class="container">
       {% if username %}
       <span id="hello" >Hello, <a id="username" href="{{ url_for('settings') }}">{{ username }}</a></span>
-      <a id="logout" href="{{ url_for('logout') }}">LOG OUT</a>
+      <a id="logout" href="{{ url_for('logout') }}">Log out</a>
       {% else %}
-      <a id="login" href="{{ url_for('login', redirectTo='forum') }}">LOG IN</a>
-      <a id="register" href="{{ url_for('register', redirectTo='forum') }}">SIGN UP</a>
+      <a id="login" href="{{ url_for('login', redirectTo='forum') }}">Log in</a>
+      <a id="register" href="{{ url_for('register', redirectTo='forum') }}">Sign up</a>
       {% endif %}
-      <!-- <a href="{{ url_for('forum') }}">Forum</a> -->
 
     </div>
   </div> <!-- navbar-right -->
