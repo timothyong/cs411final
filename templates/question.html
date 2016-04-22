@@ -110,7 +110,7 @@
 							          Report
 							        </a>
 							      </li>
-							      {% if username and username == question[5] or isAdmin %}
+							      {% if username and username == x[5] or isAdmin %}
 							      <li>
 							        <a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'>
 							        	Delete
