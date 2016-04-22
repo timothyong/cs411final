@@ -141,8 +141,9 @@ def postquestion():
     if 'username' not in session:
         return redirect(url_for("error"))
     else:
+        cred = dbutils.getUserCredits(session['username'])
         if request.method == "GET":
-            return render_template("postquestion.html", username=session['username'])
+            return render_template("postquestion.html", username=session['username'], credit=cred)
         else:
             if request.form['submit'] == 'Post':
                 questionTitle = request.form['questionTitle'].encode('ascii', 'ignore')
