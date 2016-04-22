@@ -22,9 +22,6 @@
   width: 54%;
   height: 100%;
 
-  border-left: 1px solid rgba(125, 136, 255, 0.5);
-  border-right: 1px solid rgba(124, 136, 255, 0.5);
-
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -174,7 +171,8 @@ ul.categories-list li a:hover {
 
 }
 
-ul.question-list {
+ul.question-list,
+ul.comment-list {
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -192,13 +190,15 @@ ul.question-list li.question {
   background: white;
 }
 
-ul.question-list li a {
+ul.question-list li a,
+div.question a {
   text-decoration: none;
   color: rgba(125, 136, 255, 1);
 }
 
 /* Questions */
-.question-header {
+.question-header,
+.comment-header {
   font-size: 0.8em;
   position: relative;
 }
@@ -209,17 +209,24 @@ ul.question-list li a {
   padding-top: 2px;
 }
 
-.question-body {
+div.question .question-title {
+  font-size: 1.7em;
+}
+
+.question-body,
+.comment-body {
   font-family: "Lato-Light", sans-serif;
 }
 
-.question-options {
+.question-options,
+.comment-options {
   display: inline;
   position: absolute;
   right: 0;
 }
 
-.question-options .ellipsis a {
+.question-options .ellipsis a,
+.comment-options .ellipsis a {
   cursor: pointer;
   float: right;
   font-size: 1.7em;
@@ -227,25 +234,30 @@ ul.question-list li a {
   border-radius: 3px;
 }
 
-.question-options:hover .ellipsis a {
+.question-options:hover .ellipsis a,
+.comment-options:hover .ellipsis a {
   background: rgba(0, 0, 0, 0.05);
 }
 
-.question-options .ellipsis i {
+.question-options .ellipsis i,
+.comment-options .ellipsis i {
   padding: 2px 4px 0 4px;
   color: rgba(125, 136, 255, 0.5);
 }
 
-.question-options:hover .ellipsis i {
+.question-options:hover .ellipsis i,
+.comment-options:hover .ellipsis i {
   color: rgba(125, 136, 255, 0.85);
 }
 
-.question-options:hover .question-dropdown {
+.question-options:hover .question-dropdown,
+.comment-options:hover .comment-dropdown {
   display: block;
   opacity: 1;
 }
 
-.question-dropdown {
+.question-dropdown,
+.comment-dropdown {
   float: right;
   color: black;
   display: none;
@@ -262,31 +274,36 @@ ul.question-list li a {
   -webkit-transition: opacity 0.25s ease-in-out;
 }
 
-.question-dropdown-show {
+.question-dropdown-show,
+.comment-dropdown-show {
   display: block;
   opacity: 1;
 }
 
-.question-dropdown ul {
+.question-dropdown ul,
+.comment-dropdown ul {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
 
-.question-dropdown ul li {
+.question-dropdown ul li,
+.comment-dropdown ul li {
   padding: 0;
   width: 100%;
   box-sizing: border-box;
 }
 
-.question-dropdown ul li a {
+.question-dropdown ul li a,
+.comment-dropdown ul li a {
   color: rgb(125, 136, 180);
   padding: 5px 20px;
   font-size: 1em;
   display: block;
 }
 
-.question-dropdown ul li a:hover {
+.question-dropdown ul li a:hover,
+.comment-dropdown ul li a:hover {
   background: rgba(125, 136, 255, 0.85);
   color: white;
 }
@@ -294,28 +311,34 @@ ul.question-list li a {
 .question-footer {
   /*background: green;*/
   padding: 12px 0 5px 0;
-
 }
 
-.question-footer a {
+.question-footer a.write-button,
+.question-footer .answer-form button,
+.question-footer a.style2 {
   background: rgba(125, 136, 255, 0.15);
-  color: rgba(125, 136, 180, 1) !important;
+  color: rgba(125, 136, 180, 1);
   border-radius: 3px;
   padding: 4px 10px;
   border: 1px solid rgba(125, 136, 180, 0.5);
+  cursor: pointer;
 
   display: inline-block;
 }
 
-.question-footer a:hover {
+.question-footer a.write-button:hover,
+.question-footer .answer-form button:hover,
+.question-footer a.style2:hover {
   background: rgba(125, 136, 255, 0.1);
-  color: rgba(125, 136, 180, 0.85) !important;
+  color: rgba(125, 136, 180, 0.85);
   border: 1px solid rgba(125, 136, 180, 0.3);
 }
 
-.question-footer a:active {
+.question-footer a.write-button:active,
+.question-footer .answer-form button:active,
+.question-footer a.style2:active {
   background: rgba(125, 136, 255, 0.25);
-  color: rgba(125, 136, 180, 1) !important;
+  color: rgba(125, 136, 180, 1);
   border: 1px solid rgba(125, 136, 180, 0.5);
 }
 
@@ -325,10 +348,116 @@ ul.question-list li a {
   margin: 20px 0px 0px 0px;
 }
 
-/*li.question:last-child .question-footer hr {
+/* Question page (question.html) exclusive shit */
+.unclickable {
+  pointer-events: none;
+  cursor: default;
+  color: rgba(125, 136, 180, 0.35) !important;
+  background: rgba(125, 136, 180, 0.15) !important;
+  border: 1px solid rgba(125, 136, 180, 0.2) !important;
+}
+
+div.answer-form-wrapper {
   display: none;
 }
 
-li.question:last-child {
-  padding-bottom: 20px !important;
-}*/
+form.answer-form {
+  display: inline-block;
+  /*background: rgba(255, 0 , 0, 0.25);*/
+  background: white;
+  width: 100%;
+  margin: 0;
+}
+
+form.answer-form textarea {
+  width: 100%;
+  height: 15vw;
+  font-family: 'Lato-Light', sans-serif;
+  font-size: 1em;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid rgba(125, 136, 255, 0.5);
+
+  margin: 10px 0;
+}
+
+.show-form {
+  display: inline-block !important;
+  width: 100%;
+}
+
+.answer-form button {
+  cursor: pointer;
+  outline: none;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 1em;
+}
+
+ul.comment-list li.answer {
+  padding: 20px 0 0 0;
+  width: auto;
+  font-family: 'Varela Round', sans-serif;
+  border: 0;
+  color: rgba(125, 136, 180, 1);
+
+  background: white;
+}
+
+.comment-body {
+  margin-bottom: 8px;
+}
+
+.comment-footer {
+  padding: 0px 0 0 0;
+}
+
+.comment-footer hr {
+  border: 0;
+  border-top: 1px solid rgba(125, 136, 255, 0.2);
+  margin: 20px 0px 0px 0px;
+}
+
+.comment-footer a.style2 {
+  background: rgba(125, 136, 255, 0.15);
+  color: rgba(125, 136, 180, 1);
+  border-radius: 3px;
+  padding: 4px 10px;
+  border: 1px solid rgba(125, 136, 180, 0.5);
+  cursor: pointer;
+
+  display: inline-block;
+}
+
+.comment-footer a.style2:hover {
+  background: rgba(125, 136, 255, 0.1);
+  color: rgba(125, 136, 180, 0.85);
+  border: 1px solid rgba(125, 136, 180, 0.3);
+}
+
+.comment-footer a.style2:active {
+  background: rgba(125, 136, 255, 0.25);
+  color: rgba(125, 136, 180, 1);
+  border: 1px solid rgba(125, 136, 180, 0.5);
+}
+
+div.question {
+  padding: 20px 20px 0 20px;
+  width: auto;
+  font-family: 'Varela Round', sans-serif;
+  border: 0;
+  color: rgba(125, 136, 180, 1);
+  border-left: 1px solid rgba(125, 136, 255, 0.5);
+  border-right: 1px solid rgba(125, 136, 255, 0.5);
+
+  background: white;
+}
+
+div.answers-count {
+  padding-top: 15px;
+}
+
+div.answers-count span {
+  font-size: 1.3em;
+  color: rgba(125, 136, 255, 1);
+  font-weight: bold;
+}

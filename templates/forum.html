@@ -129,7 +129,7 @@
             </div>
 
             <div class="question-footer">
-              <a href="{{ url_for('question', qid=x[3]) }}">
+              <a class="write-button" href="{{ url_for('question', qid=x[3]) }}">
                 {% if username and username == x[5] %}
                 Post Reply
                 {% else %}

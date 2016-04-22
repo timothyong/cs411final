@@ -1,81 +1,153 @@
 <head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/forum.css') }}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
 
-<div class="question-page">
+{% include 'header.html' %}
 
-	{% if username %}
-	{% include 'header.html' %}
-	{% else %}
-	<a href="{{ url_for('login', redirectTo='index') }}">Login</a>
-	<a href="{{ url_for('register', redirectTo='index') }}">Register</a>
-	{% endif %}
-	<br>
+<body>
+	<div class="main-container-flexbox">
+		<div class="main-container">
+			<div class="question">
+				<div class="question-header">
+					Asked by
+					<a href="#">{{ question[5] }}</a>
+					in
+					<a href="{{ url_for('forum', category=question[4]) }}">{{ question[4] }}
+					</a>
+					<!-- <i class="fa fa-dot-circle-o"></i> -->
+					//
+					{{ question[1] }}
 
-	<h1>{{ question[0] }}</h1>
-	<h6> (category: {{ question[4] }})</h6>
-	<span class="post-name">{{ question[5] }}</span> <span class="post-date">on {{ question[1] }}</span>
+					<div class="question-options">
+					  <div tabindex="0" class="ellipsis">
+					    <a>
+					      <i class="fa fa-ellipsis-h">
+					      </i>
+					    </a>
+					  </div>
+					  <div class="question-dropdown">
+					    <ul class="dropdown-links">
+					      <li>
+					        <a href="#">
+					          Report
+					        </a>
+					      </li>
+					      {% if username and username == question[5] or isAdmin %}
+					      <li>
+					        <a href="{{ url_for('deletequestion', qid=question[3]) }}">
+					          Delete
+					        </a>
+					      </li>
+					      {% endif %}
+					    </ul>
 
-	<div class="post-comment">
-		{{ question[2] }}
-	</div>
-	
-	{% if username %}
-	{% if username == question[5] %}
-	<a href='{{ url_for("deletequestion", qid=question[3]) }}'> Delete </a>
-	{% endif %}
-	{% endif %}
+					  </div>
+					</div>
+				</div> <!-- question-header -->
 
-	<hr>
-	<hr>
-	<hr>
-	{% for x in answers %}
-	<div>
-	
-		<div id="question-score-div">
-			{% if username %}
-			<a href="{{ url_for('vote', aid=x[2], updown='up') }}">{{ x[0] }}</a>
-			{% else %}
-			<a href="{{ url_for('login', redirectTo='forum') }}">{{ x[0] }}</a>
-			{% endif %}
+				<div class="question-title">
+          <a>{{ question[0] }}</a>
+        </div>
+
+        <div class="question-body" style="white-space: pre-line;">
+          {{ question[2] }}
+        </div>
+
+        <div class="question-footer" style="padding-bottom: 0;">
+        	{% if username and username == question[5] %}
+          <a class="answer-button style2" style="cursor: pointer;">
+            Write Answer
+          </a>
+          {% endif %}
+
+					<div class="answer-form-wrapper" >
+	          <form class="answer-form" method="POST">
+							<textarea name="answer" rows="4"></textarea><br>
+							<button type="submit" value="submit" style="margin-right: 5px;">
+								Submit
+							</button>
+							<a class="cancel-write style2" style="margin-right: 5px;">
+								Cancel
+							</a>
+							<span class="character-count">0</span><span id="cc"> characters</span>
+						</form>
+					</div>
+
+					<div class="answers-count">
+						<span>{{ answers|length }} Answers</span>
+					</div>
+          <hr style="margin: 0 !important;">
+        </div>
+
+        <script>
+          var q = document.querySelectorAll('.question-body');
+          for (var i = 0; i < q.length; i++)
+            q[i].innerHTML = q[i].innerHTML.trim()
+        </script>
+
+				<!-- Comments -->
+        <ul class="comment-list">
+					{% for x in answers %}
+					<li class="answer">
+						<div class="comment-header">
+							Answered by
+							<a href="#">{{ x[5] }}</a>
+							//
+							{{ x[1] }}
+
+							<div class="comment-options">
+							  <div tabindex="0" class="ellipsis">
+							    <a>
+							      <i class="fa fa-ellipsis-h">
+							      </i>
+							    </a>
+							  </div>
+							  <div class="comment-dropdown">
+							    <ul class="dropdown-links">
+							      <li>
+							        <a href="#">
+							          Report
+							        </a>
+							      </li>
+							      {% if username and username == question[5] or isAdmin %}
+							      <li>
+							        <a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'>
+							        	Delete
+							        </a>
+							      </li>
+							      {% endif %}
+							    </ul>
+
+							  </div>
+							</div>
+						</div> <!-- comment-header -->
+
+						<div class="comment-body" style="white-space: pre-line;">
+		          {{ x[3] }}
+		        </div>
+
+						<script>
+		          var q = document.querySelectorAll('.comment-body');
+		          for (var i = 0; i < q.length; i++)
+		            q[i].innerHTML = q[i].innerHTML.trim()
+		        </script>
+
+						<div class="comment-footer">
+              <a class="upvote-button style2" href="{{ url_for('question', qid=x[3]) }}">
+								Upvote
+              </a>
+              <a class="downvote-button style2" href="{{ url_for('question', qid=x[3]) }}">
+								Downvote
+              </a>
+              <hr>
+            </div>
+					</li>
+					{% endfor %}
+        </ul>
+			</div> <!-- question -->
 		</div>
-
-		<div id="question-post-div">
-			<span class="post-name">
-				{{ x[5] }}
-			</span>
-			
-			<span class="post-date">
-				on {{ x[1] }}
-			</span>
-			
-			<div class="post-comment">
-				{{ x[3] }}
-			</div>
-			<br>
-			{% if username %}
-			{% if username == x[5] %}
-			<a href='{{ url_for("deleteanswer", aid=x[2], qid=question[3]) }}'> Delete </a>
-			{% endif %}
-			{% endif %}
-		</div>
-		
 	</div>
-	<hr>
-	{% endfor %}
 
-
-	{% if username %}
-	{% if error %}
-	{{ error }}
-	{% else %}
-	<div class="links-container" id="post-button">
-		<form method="POST">
-			<textarea name="answer" rows="4" style="width: 360px; max-width: 360px;"></textarea><br>
-			<button type="submit" value="submit" name="button" style="width: 360px;">Post</button>
-		</form>
-	</div>
-	{% endif %}
-	{% endif %}
-
-</div>
+	<script src="../static/js/question.js"></script>
+</body>
