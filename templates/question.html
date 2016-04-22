@@ -55,7 +55,7 @@
         </div>
 
         <div class="question-footer" style="padding-bottom: 0;">
-        	{% if username and username == question[5] %}
+        	{% if username and username != question[5] %}
           <a class="answer-button style2" style="cursor: pointer;">
             Write Answer
           </a>
