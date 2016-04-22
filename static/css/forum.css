@@ -95,8 +95,12 @@ ul.categories-list li a:hover {
 /* Main Container shit */
 .main-container {
 
+/*  border-left: 1px solid rgba(125, 136, 255, 0.5);
+  border-right: 1px solid rgba(125, 136, 255, 0.5);*/
 }
+
 .mc-header-wrapper {
+
 }
 
 .mc-header {
@@ -446,8 +450,6 @@ div.question {
   font-family: 'Varela Round', sans-serif;
   border: 0;
   color: rgba(125, 136, 180, 1);
-  border-left: 1px solid rgba(125, 136, 255, 0.5);
-  border-right: 1px solid rgba(125, 136, 255, 0.5);
 
   background: white;
 }
@@ -460,4 +462,8 @@ div.answers-count span {
   font-size: 1.3em;
   color: rgba(125, 136, 255, 1);
   font-weight: bold;
+}
+
+a.upvote-button {
+  margin-right: 5px;
 }

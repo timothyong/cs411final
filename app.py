@@ -278,7 +278,7 @@ def vote(aid = None, updown = None):
             upvotes += 1
             rank += 1
             cred += .2
-        else:
+        elif updown == "down":
             upvotes -= 1
             rank -= 1
         if aid in voted:

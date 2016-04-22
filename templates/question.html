@@ -134,10 +134,10 @@
 		        </script>
 
 						<div class="comment-footer">
-              <a class="upvote-button style2" href="{{ url_for('question', qid=x[3]) }}">
-								Upvote
+              <a class="upvote-button style2" href="{{ url_for('vote', aid=x[2], updown='up') }}">
+								Upvote | {{ x[0] }}
               </a>
-              <a class="downvote-button style2" href="{{ url_for('question', qid=x[3]) }}">
+              <a class="downvote-button style2" href="{{ url_for('vote', aid=x[2], updown='down') }}">
 								Downvote
               </a>
               <hr>
