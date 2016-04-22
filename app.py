@@ -10,18 +10,31 @@ app.secret_key = "el em eff ay oh"
 def forum(category = None):
     if request.method == "GET":
         allCategories = dbutils.getCategories()
+        questionsArr = []
         if category is None:
             allQuestions = dbutils.getAllQuestions()
+            for x in allQuestions:
+                newArr = []
+                for y in x:
+                    newArr.append(y)
+                newArr[1] = time.ctime(newArr[1])
+                questionsArr.append(newArr)
             if 'username' in session:
-                return render_template("forum.html", username=session['username'], questions=allQuestions, categories=allCategories)
+                return render_template("forum.html", username=session['username'], questions=questionsArr, categories=allCategories)
             else:
-                return render_template("forum.html", questions=allQuestions,categories=allCategories)
+                return render_template("forum.html", questions=questionsArr,categories=allCategories)
         else:
             questions = dbutils.getQuestionsByCategory(category)
+            for x in questions:
+                newArr = []
+                for y in x:
+                    newArr.append(y)
+                newArr[1] = time.ctime(newArr[1])
+                questionsArr.append(newArr)
             if 'username' in session:
-                return render_template("forum.html", username=session['username'], questions=questions, category=category,categories=allCategories )
+                return render_template("forum.html", username=session['username'], questions=questionsArr, category=category,categories=allCategories )
             else:
-                return render_template("forum.html", questions=questions, category=category,categories=allCategories)
+                return render_template("forum.html", questions=questionsArr, category=category,categories=allCategories)
     else:
         searchString = request.form['searchfield'].encode('ascii', 'ignore').strip()
         searchTokens = searchString.split(' ')
