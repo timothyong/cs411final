@@ -11,7 +11,7 @@
 <body>
   <div class="main-container-flexbox">
     <div class="main-container">
-      <form class="post-question" method="POST">
+      <form class="post-question" method="POST" style="background: white;">
         <div class="section-header">
           New Question
           <hr>
@@ -46,7 +46,8 @@
           <span class="maintext">Rep Requirement - </span><span class="subtext"><em>Require users to meet a certain Rep minimum in order to answer!</em></span>
           <hr>
         </div>
-        <input style="width: 25%;" type="text" name="min" placeholder="Enter a number..."> <span class="subradio">Or you can just leave it blank for no requirement!</span>
+        <input class="credits {% if credit < 1 %}unclickable{% endif %}" style="width: 25%; margin-bottom: 5px;" type="text" name="min" placeholder="Enter a number...">
+        <div class="subradio">It costs 1 credit to specify a requirement. You currently have <span style="color: rgba(125, 136, 255, 1);">{{ credit }}</span> credits. You can also just leave the field blank to let all users answer your question.</div>
         <br>
 
         <button class="submit-question" type="submit" name="submit" value="Post">

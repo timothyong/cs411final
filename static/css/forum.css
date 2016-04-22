@@ -586,7 +586,7 @@ span#rs {
 
 /* POST QUESTION */
 form.post-question {
-  padding: 20px 20px 0 20px;
+  padding: 20px;
 }
 
 form.post-question div.section-header {
@@ -654,7 +654,7 @@ form.post-question button.submit-question {
 
 form.post-question button.submit-question {
   width: 100%;
-  margin-top: 10px;
+  margin-top: -10px;
   font-family: 'Varela Round', sans-serif;
 }
 
@@ -676,6 +676,7 @@ form.post-question span.mainradio {
   color: rgba(125, 136, 255, 0.85);
 }
 
+form.post-question div.subradio,
 form.post-question span.subradio {
   font-family: 'Varela Round', sans-serif;
   color: rgba(125, 136, 180, 0.75);
@@ -699,3 +700,5 @@ form.post-question textarea.question-body {
 form.post-question textarea.question-body:focus {
   border: 1px solid rgba(125, 136, 255, 0.85);
 }
+
+
