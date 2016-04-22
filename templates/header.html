@@ -11,17 +11,6 @@
       <div class="logo">
         <a href="{{ url_for('forum') }}">SEXYLOGO</a>
       </div>
-
-      <div class="search-bar">
-        {% if request.path == url_for("forum") %}
-        <!-- <form method="POST">
-          <input type="text" name="searchfield" placeholder="Find an answer!">
-          <button type="submit" value="submit" name="button" id="register">Search</button>
-        </form> -->
-        {% else %}
-        <a id="register" href="{{ url_for('forum') }}">Search</a>
-        {% endif %}
-      </div>
     </div> <!-- navbar-logo -->
   </div> <!-- navbar-left -->
 

@@ -46,7 +46,7 @@ def getAnswerById(aid):
     return c.fetchone()
 
 def getAnswersByUser(username, order):
-    c.execute('SELECT * FROM answers WHERE username=:username ORDER BY :order DESC', 
+    c.execute('SELECT * FROM answers WHERE username=:username ORDER BY :order DESC',
               {"username":username, "order":order})
     return c.fetchall()
 
@@ -137,43 +137,44 @@ def changePassword(username, password, newpassword):
                   {"newpassword":newpassword, "username":username})
         conn.commit()
         return "Password successfully changed"
-        
+
 def getKey(item):
     return item[0]
-    
+
 def searchQuestions(searchTokens):
-    
+
     c.execute('SELECT * FROM questions')
     questionList = c.fetchall();
-    
+
     results = []
-    
+
     for entry in questionList: # for questions
         matchStrength = 0
         postWords = entry[0] + " " + entry[2] # title + " " + question_text
-        
+
         c.execute('SELECT * FROM answers WHERE qid=:qid', {"qid":entry[3]})
         answerList = c.fetchall();
-        
+
         answersString = ""
         upvoteSum = 0 # total upvotes by answers in this question
         for answer in answerList:
             upvoteSum += answer[0]
             answersString += " " + answer[3]
-            
+
         postWords += " " + answersString
-        
+
         for word in searchTokens: # for search token
             matches = postWords.lower().count(word.lower())
             if(matches != 0):
                 matchStrength += matches
-            
+
         if matchStrength != 0:
-            results.append((matchStrength * (upvoteSum+1), entry[0], entry[3]))
+            # results.append((matchStrength * (upvoteSum+1), entry[0], entry[3]))
+            results.append((matchStrength * (upvoteSum+1), entry))
     sort = []
     sort = sorted(results, key=getKey, reverse=True)
     return sort
-        
+
 '''
 def isUserAdmin(username):
     return False'''
@@ -187,4 +188,4 @@ def isUserAdmin(username):
     else:
         return True
 '''
-    
+

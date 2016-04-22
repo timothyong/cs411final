@@ -346,7 +346,9 @@ div.question .question-title {
   border: 1px solid rgba(125, 136, 180, 0.5);
 }
 
-.question-footer hr {
+.question-footer hr,
+.results-header-container hr,
+.question-result-footer hr {
   border: 0;
   border-top: 1px solid rgba(125, 136, 255, 0.2);
   margin: 20px 0px 0px 0px;
@@ -466,4 +468,113 @@ div.answers-count span {
 
 a.upvote-button {
   margin-right: 5px;
+}
+
+/* SEARCH */
+form.search-form {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+form.search-form input {
+  box-sizing: border-box;
+  font-family: 'Varela Round', sans-serif;
+  border-radius: 3px 0 0 3px;
+  font-size: 1em;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  box-sizing:         border-box;
+
+  border: 1px solid rgba(125, 136, 255, 0.5);
+  padding: 10px;
+  width: 80%;
+  color: rgba(125, 136, 255, 0.5);
+}
+
+form.search-form input:focus {
+  border: 1px solid rgba(125, 136, 255, 1);
+  outline: none;
+  color: rgb(125, 136, 255);
+}
+
+form.search-form input::-webkit-input-placeholder {
+  color: rgba(125, 136, 255, 0.5);
+}
+
+/* Firefox 18- */
+form.search-form input::-moz-placeholder {
+  color: rgba(125, 136, 255, 0.5);
+}
+
+/* Firefox 19+ */
+form.search-form input::-moz-placeholder {
+  color: rgba(125, 136, 255, 0.5);
+}
+
+form.search-form input:-ms-input-placeholder  {
+  color: rgba(125, 136, 255, 0.5);
+}
+
+form.search-form button {
+  color: white;
+  padding: 10px 0;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 1em;
+  width: 19%;
+  border: 0;
+  margin: 0;
+  border-radius: 0 3px 3px 0;
+  border-top: 1px solid rgba(125, 136, 255, 0.50);
+  border-right: 1px solid rgba(125, 136, 255, 0.50);
+  border-bottom: 1px solid rgba(125, 136, 255, 0.50);
+  background: rgba(125, 136, 255, 0.75);
+}
+
+form.search-form button:hover {
+  cursor: pointer;
+  background: rgba(125, 136, 255, 0.65);
+}
+
+form.search-form button:active {
+  background: rgba(125, 136, 255, 0.85);
+}
+
+span#ss {
+  color: rgba(125, 136, 180, 1);
+}
+
+span#rs {
+  font-size: 1.5em !important;
+  color: rgba(125, 136, 255, 0.85);
+  font-weight: bold;
+}
+
+.question-result {
+  padding: 20px 20px 0 20px;
+  width: auto;
+  font-family: 'Varela Round', sans-serif;
+  border: 0;
+  color: rgba(125, 136, 180, 1);
+
+  background: white;
+}
+
+.question-result-footer {
+  /*background: green;*/
+  padding: 0 0 5px 0;
+}
+
+.question-result-title {
+  font-size: 1em;
+  font-weight: bold;
+  padding-top: 2px;
+}
+
+.question-result-title a {
+  color: rgba(125, 136, 180, 1) !important;
 }

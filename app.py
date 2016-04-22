@@ -257,9 +257,9 @@ def search():
         for entry in sort:
             searchResults.append(entry)
         if 'username' in session:
-            return render_template("search.html", results=searchResults, username=session['username'])
+            return render_template("search.html", results=searchResults, username=session['username'], searchString=searchString)
         else:
-            return render_template("search.html", results=searchResults)
+            return render_template("search.html", results=searchResults, searchString=searchString)
 
 @app.route("/vote/<aid>/<updown>")
 def vote(aid = None, updown = None):
